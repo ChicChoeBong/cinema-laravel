@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BaiVietSeeder::class);
         $this->call(LichChieuSeeder::class);
         $this->call(PhimSeeder::class);
+        $this->call(ConfigSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }

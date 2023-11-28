@@ -19,7 +19,7 @@ class HomepageController extends Controller
         $phim_3 = Phim::where('id', $config->phim_3)->first();
 
         $list_phim = Phim::where('tinh_trang' , '>' , 0)->get();
-        return view('Client.homepage', compact('config', 'phim_1', 'phim_2', 'phim_3' , 'list_phim'));
+        return view('client.homepage', compact('config', 'phim_1', 'phim_2', 'phim_3' , 'list_phim'));
 
     }
 
