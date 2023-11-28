@@ -112,8 +112,7 @@ class CustomerController extends Controller
     {
         $customer = Customer::where('email', $request->email)->first();
         $hash     = Str::uuid();
-
-        $customer->hash_reset = $hash;
+$customer->hash_reset = $hash;
         $customer->save();
 
         toastr()->success('Vui lòng kiểm tra email');
@@ -209,8 +208,7 @@ class CustomerController extends Controller
         $baiViet = QuanLyBaiViet::where('is_open', 1)->get();
         return view('client.bai_viet_detail', compact('baiVietDetail','baiViet'));
     }
-
-    public function actionLogout()
+public function actionLogout()
     {
         Auth::guard('customer')->logout();
 

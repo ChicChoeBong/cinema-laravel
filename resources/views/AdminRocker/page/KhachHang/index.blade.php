@@ -33,7 +33,6 @@
                     <td class="text-nowrap text-center align-middle">
                         <button v-on:click="changeStatus(value.id)" class="btn btn-danger" v-if="value.loai_tai_khoan == -1">Tạm Khóa</button>
                         <button v-on:click="changeStatus(value.id)"  class="btn btn-success" v-else>Đang Mở</button>
-
                     </td>
                     <td class="text-nowrap text-center align-middle">
                         <button  v-on:click="kichHoat(value.id)" class="btn btn-warning" v-if="value.loai_tai_khoan == 1">Hủy Kích Hoạt</button>
@@ -43,7 +42,6 @@
                         <button v-on:click="edit = value" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#capNhatModal">Cập Nhật</button>
                         <button v-on:click="xoa = value" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#xoaModal">Xóa</button>
                     </td>
-
                 </tr>
             </tbody>
         </table>

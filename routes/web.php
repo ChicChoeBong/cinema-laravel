@@ -15,6 +15,7 @@ use App\Models\Phong;
 use App\Models\QuanLyBaiViet;
 use App\Models\QuanLyKhachHang;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 //Ngân
 Route::get('/', [HomepageController::class, 'index']);
@@ -26,6 +27,17 @@ Route::post('/login', [CustomerController::class, 'actionLogin']);
 Route::get('/register', [CustomerController::class, 'viewRegister']);
 Route::post('/register', [CustomerController::class, 'actionRegister']);
 Route::get('/logout', [CustomerController::class, 'actionLogout']);
+
+Route::get('/chinh-sach-rieng-tu', function(){
+    return '<h1>Chính sách riêng tư</h1>';
+});
+Route::get('/auth/facebook', function(){
+    return Socialite::driver('facebook')->redirect();
+});
+Route::get('/auth/facebook/callback', function(){
+    return 'Callback login facebook';
+});
+
 
 //Mạnh
 //Reset password
