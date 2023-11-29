@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
-	<title>Login Hệ Thống Bán Vé Xem Phim</title>
+	<title>Đăng Nhập Hệ Thống Bán Vé Xem Phim</title>
 </head>
 
 <body class="bg-login">
@@ -42,17 +42,17 @@
 							<div class="card-body">
 								<div class="border p-4 rounded">
 									<div class="text-center">
-										<h3 class="">Sign in</h3>
+										<h3 class="">Đăng Nhập</h3>
 									</div>
 									<div class="form-body">
 										<form action="/admin/login" method="post" class="row g-3">
                                             @csrf
 											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input name="email" type="email" class="form-control" id="inputEmailAddress" placeholder="Email Address">
+												<label for="inputEmailAddress" class="form-label">Email</label>
+												<input name="email" type="email" class="form-control" id="inputEmailAddress" placeholder="Nhập vào email...">
 											</div>
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Enter Password</label>
+												<label for="inputChoosePassword" class="form-label">Mật Khẩu</label>
 												<div class="input-group" id="show_hide_password">
 													<input name="password" type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
@@ -60,14 +60,14 @@
 											<div class="col-md-6">
 												<div class="form-check form-switch">
 													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+													<label class="form-check-label" for="flexSwitchCheckChecked">Nhớ tài khoản</label>
 												</div>
 											</div>
-											<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
+											<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Quên mật khẩu ?</a>
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Sign in</button>
+													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Đăng Nhập</button>
 												</div>
 											</div>
 										</form>

@@ -151,12 +151,17 @@ class CustomerController extends Controller
         // End Phân JOB
 
         toastr()->success('Đã tạo tài khoản thành công!');
-        return redirect('/login');
+        return redirect('/thong-bao');
     }
 
     public function viewLogin()
     {
         return view('client.login');
+    }
+
+    public function thongBaoKichHoatTaiKhoan()
+    {
+        return view('client.thong_bao_kich_hoat_tai_khoan');
     }
 
     public function actionLogin(LoginRequest $request)
@@ -214,6 +219,6 @@ class CustomerController extends Controller
     {
         Auth::guard('customer')->logout();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

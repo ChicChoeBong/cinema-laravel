@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="/assets_admin_rocker/css/dark-theme.css" />
 <link rel="stylesheet" href="/assets_admin_rocker/css/semi-dark.css" />
 <link rel="stylesheet" href="/assets_admin_rocker/css/header-colors.css" />
-<title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
+<title>Hệ thống quản lý rạp phim</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

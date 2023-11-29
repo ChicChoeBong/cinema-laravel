@@ -1,4 +1,3 @@
-<!-- footer-area -->
 <footer>
     <div class="footer-top-wrap">
         <div class="container">
@@ -6,7 +5,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3">
                         <div class="footer-logo">
-                            <a href="/assets_client/index.html"><img src="/assets_client/img/logo/logo.png" alt=""></a>
+                            <a href="/"><img src="/assets_client/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -14,15 +13,15 @@
                             <nav>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
-                                        <li class="active menu-item-has-children"><a href="/">Home</a>
+                                        <li class="active menu-item-has-children"><a href="/">Trang Chủ</a>
                                         </li>
                                         <li class="menu-item-has-children"><a href="/phim-dang-chieu">Phim Đang Chiếu</a>
                                         </li>
                                         <li class="menu-item-has-children"><a href="/phim-sap-chieu">Phim Sắp Chiếu</a>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="/bai-viet">Blog</a>
+                                        <li class="menu-item-has-children"><a href="#">Bài Viết</a>
                                         </li>
-                                        <li><a href="contact.html">contacts</a></li>
+                                        <li><a href="#">Liên Hệ</a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -35,10 +34,9 @@
                     <div class="col-md-7">
                         <div class="quick-link-list">
                             <ul>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Help Center</a></li>
-                                <li><a href="#">Terms of Use</a></li>
-                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#">Câu hỏi thường gặp</a></li>
+                                <li><a href="#">Trung tâm trợ giúp</a></li>
+                                <li><a href="#">Điều khoản sử dụng</a></li>
                             </ul>
                         </div>
                     </div>
@@ -61,7 +59,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="copyright-text">
-                        <p>Copyright &copy;  @php echo date('Y') @endphp. All Rights Reserved By <a href="/assets_client/index.html">DZFullStack</a></p>
+                        <p>Bản quyền &copy;  @php echo date('Y') @endphp . Mọi quyền được bảo lưu bởi <a href="/assets_client/index.html">ChicBong</a></p>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6">
@@ -73,4 +71,3 @@
         </div>
     </div>
 </footer>
-<!-- footer-area-end -->

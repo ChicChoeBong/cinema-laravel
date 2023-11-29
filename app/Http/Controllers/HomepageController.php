@@ -23,12 +23,6 @@ class HomepageController extends Controller
 
     }
 
-    public function test()
-    {
-        Log::info("Oke, đã chạy!");
-        // return view('client.kich_hoat_tai_khoan');
-    }
-
     public function chiTietPhim($slug)
     {
         $parts = explode('-', $slug);

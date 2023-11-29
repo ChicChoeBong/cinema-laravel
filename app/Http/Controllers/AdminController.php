@@ -28,6 +28,13 @@ class AdminController extends Controller
         }
     }
 
+    public function actionLogout()
+    {
+        Auth::guard('admin')->logout();
+
+        return redirect('/admin/login');
+    }
+
     public function index()
     {
         return view('AdminRocker.page.TaiKhoan.index');

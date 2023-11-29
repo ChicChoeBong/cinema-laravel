@@ -5,15 +5,8 @@
         <div class="row align-items-end mb-60">
             <div class="col-lg-6">
                 <div class="section-title text-center text-lg-left">
-                    <span class="sub-title">ONLINE STREAMING</span>
+                    <span class="sub-title">CHICBONG</span>
                     <h2 class="title">Phim Đang Chiếu</h2>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="movie-page-meta">
-                    <div class="tr-movie-menu-active text-center">
-                        <button class="active" data-filter="*">Hot Phim</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -43,7 +36,7 @@
                             <ul>
                                 <li><span class="quality">hd</span></li>
                                 <li>
-                                    <span class="duration"><i class="far fa-clock"></i> {{ $value->thoi_luong }} min</span>
+                                    <span class="duration"><i class="far fa-clock"></i> {{ $value->thoi_luong }} phút</span>
                                     <span class="rating"><i class="fas fa-thumbs-up"></i> 3.5</span>
                                 </li>
                             </ul>

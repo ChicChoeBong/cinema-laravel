@@ -1,4 +1,3 @@
-<!-- header-area -->
 <header class="header-style-two">
     @php
         $check = Auth::guard('customer')->check();
@@ -9,7 +8,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6 d-none d-md-block">
                     <div class="header-top-subs">
-                        <p>Công Ty Cổ Phần <span>DZFullStack</span></p>
+                        <p>Công Ty Cổ Phần <span>ChicBong</span></p>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -44,20 +43,19 @@
                                     <img src="/assets_client/img/logo/logo.png" alt="Logo">
                                 </a>
                             </div>
+
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
-                                <div class="navbar-wrap main-menu d-none d-lg-flex">
-                                    <ul class="navigation">
-                                        <li class="menu-item-has-children"><a href="/">Home</a>
-                                        </li>
-                                        <li class="menu-item-has-children"><a href="/phim-dang-chieu">Phim Đang Chiếu</a>
-                                        </li>
-                                        <li class="menu-item-has-children"><a href="/phim-sap-chieu">Phim Sắp Chiếu</a>
-                                        </li>
-                                        <li class="menu-item-has-children"><a href="/bai-viet">Blog</a>
-                                        </li>
-                                        <li><a href="contact.html">contacts</a></li>
-                                    </ul>
-                                </div>
+                                <ul class="navigation">
+                                    <li class="active menu-item-has-children"><a href="/">Trang Chủ</a>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="/phim-dang-chieu">Phim Đang Chiếu</a>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="/phim-sap-chieu">Phim Sắp Chiếu</a>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="#">Bài Viết</a>
+                                    </li>
+                                    <li><a href="#">Liên Hệ</a></li>
+                                </ul>
                             </div>
                             <div class="header-action d-none d-md-block">
                                 <ul>
@@ -70,19 +68,19 @@
                                             </form>
                                         </div>
                                     </li>
+
                                     @if ($check)
                                         <div class="navbar-wrap main-menu d-none d-lg-flex">
                                             <ul class="navigation">
                                                 <li class="active menu-item-has-children ml-4"><a href="#"><i class="fa-solid fa-user fa-2x"></i></a>
                                                     <ul class="submenu">
-                                                        <li><a href="index.html">Trang Cá Nhân</a></li>
                                                         <li><a href="/logout">Đăng Xuất</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
                                         </div>
                                     @else
-                                        <li class="header-btn"><a href="/register" class="btn">Sign In</a></li>
+                                        <li class="header-btn"><a href="/login" class="btn">Đăng Nhập</a></li>
                                     @endif
                                 </ul>
                             </div>
@@ -120,5 +118,3 @@
     </div>
 </header>
 <!-- header-area-end -->
-
-

@@ -1,10 +1,10 @@
  <!-- breadcrumb-area -->
- <section class="breadcrumb-area breadcrumb-bg" data-background="/assets_client/img/bg/breadcrumb_bg.jpg">
+ <section class="breadcrumb-area breadcrumb-bg" data-background="/assets_client/img/bg/bannerrapphim.jpg">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="breadcrumb-content">
-                    <h2 class="title">DZFullStack <span>CINEMA</span></h2>
+                    <h2 class="title">CHICBONG <span>CINEMA</span></h2>
                 </div>
             </div>
         </div>

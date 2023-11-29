@@ -26,6 +26,8 @@ Route::post('/login', [CustomerController::class, 'actionLogin']);
 Route::get('/register', [CustomerController::class, 'viewRegister']);
 Route::post('/register', [CustomerController::class, 'actionRegister']);
 Route::get('/logout', [CustomerController::class, 'actionLogout']);
+Route::get('/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
+
 
 //Mạnh
 //Reset password
@@ -42,6 +44,7 @@ Route::post('/reset-password', [CustomerController::class, 'actionResetPassword'
 //Đăng nhập Admin
 Route::get('/admin/login', [AdminController::class, 'viewLogin']);
 Route::post('/admin/login', [AdminController::class, 'actionLogin']);
+Route::get('/logout', [AdminController::class, 'actionLogout']);
 
 //Lực
 //Thông tin phim đang chiếu, sắp chiếu
@@ -85,6 +88,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
     //Quản lý tài khoản khách hàng
     Route::group(['prefix' => '/khach-hang'], function() {
         Route::get('/active/{hash}', [CustomerController::class, 'actionActive']);
+        Route::get('/active/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
         Route::get('/thong-tin', [CustomerController::class, 'viewThongTin']);
         Route::get('/data', [CustomerController::class, 'getData']);
         Route::post('/update', [CustomerController::class, 'update']);

@@ -6,26 +6,7 @@
             <div class="col-xl-8 col-lg-7">
                 <div class="contact-form-wrap">
                     <div class="widget-title mb-50">
-                        <h5 class="title">Đăng Nhập</h5>
-                    </div>
-                    <div class="contact-form">
-                        <form action="/login" method="post">
-                            @csrf
-                            <div class="col-md-12">
-                                <input name="email" type="text" placeholder="Nhập vào địa chỉ email">
-                            </div>
-                            <div class="col-md-12">
-                                <input name="password" type="password" placeholder="Nhập vào mật khẩu">
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="/register" class="btn">Đăng Kí</a>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <button type="submit" class="btn">Đăng Nhập</button>
-                                </div>
-                            </div>
-                        </form>
+                        <h3 class="title">Chúng tôi đã gởi thông báo về Email của bạn. Vui lòng xác nhận Email để kích hoạt tài khoản nhé.</h3>
                     </div>
                 </div>
             </div>

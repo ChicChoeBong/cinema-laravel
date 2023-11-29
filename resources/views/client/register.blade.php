@@ -83,20 +83,20 @@
                     <h5 class="title">Thông Tin Về Chúng Tôi</h5>
                 </div>
                 <div class="contact-info-wrap">
-                    <p><span>DZFullStack Cinema :</span> Tận hưởng từng khoảnh khắc của bạn</p>
+                    <p><span>ChicBong Cinema :</span> Tận hưởng từng khoảnh khắc của bạn</p>
                     <div class="contact-info-list">
                         <ul>
                             <li>
                                 <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                                <p><span>Address :</span> 32 Xuân Diệu, Thuận Phước, Hải Châu, Đà Nẵng</p>
+                                <p><span>Địa chỉ :</span> 42 Cao Thắng, Thanh Bình, Hải Châu, Đà Nẵng</p>
                             </li>
                             <li>
                                 <div class="icon"><i class="fas fa-phone-alt"></i></div>
-                                <p><span>Phone :</span> 0905523543</p>
+                                <p><span>Điện thoại :</span> 0123456789</p>
                             </li>
                             <li>
                                 <div class="icon"><i class="fas fa-envelope"></i></div>
-                                <p><span>Email :</span> dzfullstack@gmail.com</p>
+                                <p><span>Email :</span> chicbong@gmail.com</p>
                             </li>
                         </ul>
                     </div>
