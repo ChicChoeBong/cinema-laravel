@@ -96,7 +96,7 @@
                             <p>Thời gian chiếu dự kiến từ @{{ delete_lich.thoi_gian_bat_dau }} đến @{{ delete_lich.thoi_gian_ket_thuc }}</p>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                               <button v-on:click="xoaLichChieu()" type="button" class="btn btn-primary"  data-bs-dismiss="modal">Xóa Lịch</button>
                             </div>
                           </div>
@@ -106,7 +106,7 @@
                         <div class="modal-dialog modal-xl">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Cập nhật lịch chiếu phim</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -152,7 +152,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                               <button v-on:click="capNhatLichChieu()" type="button" class="btn btn-primary"  data-bs-dismiss="modal">Cập Nhật Lịch</button>
                             </div>
                           </div>

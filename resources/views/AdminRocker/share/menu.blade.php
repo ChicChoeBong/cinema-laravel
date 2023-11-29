@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/cau-hinh/index">
+                <a class="nav-link" href="/admin/phim/index-vue">
                     <div class="parent-icon"><i class="bx bx-cookie"></i>
                     </div>
                     <div class="menu-title">Quản Lý Phim</div>
