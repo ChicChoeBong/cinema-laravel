@@ -15,15 +15,11 @@
                                 <input name="hash_reset" type="hidden" value="{{ $hash }}">
                             </div>
                             <div class="col-md-12">
-                                <input name="password" type="text" placeholder="Nhập vào mật khẩu">
+                                <input name="password" type="password" placeholder="Nhập vào mật khẩu">
                             </div>
                             <div class="col-md-12">
-                                <input name="re_password" type="text" placeholder="Nhập lại mật khẩu">
+                                <input name="re_password" type="password" placeholder="Nhập lại mật khẩu">
                             </div>
-                            {{-- <div class="col-md-12">
-                                {!! NoCaptcha::renderJs() !!}
-                                {!! NoCaptcha::display() !!}
-                            </div> --}}
                             <div class="col-md-12 text-right">
                                 <button type="submit" class="btn">Đổi Mật Khẩu</button>
                             </div>
