@@ -22,7 +22,7 @@ class ConfigSeeder extends Seeder
 
         DB::table('configs')->insert([
             [
-                'bg_homepage'     => "1",
+                'bg_homepage'     => "/assets_client/img/banner/s_slider_bg.jpg",
                 'id_phim'         => "2",
                 'phim_2'          => "3",
                 'phim_3'          => "4",
