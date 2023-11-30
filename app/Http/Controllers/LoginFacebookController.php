@@ -34,7 +34,7 @@ class LoginFacebookController extends Controller
     }
 
     protected function registrationOrLogin($data){
-        $user = User::where('email',$data->email)->first();
+        $user = User::where('email', $data->email)->first();
         if(!$user){
             $user = new User;
             $user->name = $data->name;
@@ -45,7 +45,9 @@ class LoginFacebookController extends Controller
             $user->save();
         }
 
-        $check = Auth::guard('user')->attempt($user);
+        $temp['email'] = $data->email;
+        $temp['password'] = $data->password;
+        $check = Auth::guard('user')->attempt($temp);
         if($check) {
             toastr()->success("Đã đăng nhập thành công!");
         } else {
