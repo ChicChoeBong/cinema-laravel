@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\LoginFacebook;
 use Illuminate\Http\Request;
+use App\Providers\RouteServiceProvider;
+use Laravel\Socialite\Facades\Socialite;
 
 class LoginFacebookController extends Controller
 {
@@ -12,6 +14,25 @@ class LoginFacebookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $redirectTo = RouteServiceProvider::HOME;
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
+    //facebook redirect
+    public function redirectToFacebook(){
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    //facebook callback
+    public function redirectToFacebookCallback(){
+        $user = Socialite::driver('facebook')->user();
+        $this->registrationOrLogin($user);
+        return redirect()->route('/');
+    }
+
     public function index()
     {
         //

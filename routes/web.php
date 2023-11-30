@@ -7,6 +7,7 @@ use App\Http\Controllers\GheBanController;
 use App\Http\Controllers\GiaoDichController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LichChieuController;
+use App\Http\Controllers\LoginFacebookController;
 use App\Http\Controllers\PhimController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\QuanLyBaiVietController;
@@ -29,7 +30,10 @@ Route::post('/register', [CustomerController::class, 'actionRegister']);
 Route::get('/logout', [CustomerController::class, 'actionLogout']);
 Route::get('/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
 
-
+// Route::get('/', function(){
+//     echo env('APP_URL');
+//     return view('welcome');
+// })->name('home');
 Route::get('chinh-sach-rieng-tu', function(){
     return '<h1>Chính sách riêng tư</h1>';
 });
@@ -37,10 +41,11 @@ Route::get('auth/facebook', function(){
     return Socialite::driver('facebook')->redirect();
 });
 Route::get('auth/facebook/callback', function(){
-    $user = Socialite::driver('github')->user();
+    $user = Socialite::driver('facebook')->user();
     dd($user);
 });
-
+Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [LoginFacebookController::class, 'redirectToFacebookCallback']);
 
 //Mạnh
 //Reset password

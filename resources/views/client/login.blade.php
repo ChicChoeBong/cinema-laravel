@@ -35,7 +35,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 text-right mb-3">
-                                <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
+                                <a href="{{ route('login.facebook') }}" class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
                                     <i class="fab fa-facebook-f me-2"></i>Facebook
                                 </a>
                             </div>

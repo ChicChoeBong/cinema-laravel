@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="banner-content">
-                                    <h6 class="sub-title" data-animation="fadeInUp" data-delay=".2s">DZFULLSTACK</h6>
+                                    <h6 class="sub-title" data-animation="fadeInUp" data-delay=".2s">CHICBONG</h6>
                                     <h2 class="title" data-animation="fadeInUp" data-delay=".4s">{{ $phim_3->ten_phim }}</h2>
                                     <div class="banner-meta" data-animation="fadeInUp" data-delay=".6s">
                                         <ul>
