@@ -1,6 +1,6 @@
 @extends('client.master')
 @section('content')
-<section class="contact-area contact-bg" data-background="/assets_client/img/bg/contact_bg.jpg" style="background-image: url(&quot;img/bg/contact_bg.jpg&quot;);">
+<section id="app" class="contact-area contact-bg" data-background="/assets_client/img/bg/contact_bg.jpg" style="background-image: url(&quot;img/bg/contact_bg.jpg&quot;);">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-lg-7">
@@ -9,26 +9,42 @@
                         <h5 class="title">Đăng Nhập</h5>
                     </div>
                     <div class="contact-form">
-                        <form action="/login" method="post">
-                            @csrf
+                        <div class="col-md-12">
+                            <input v-model="login.email" type="text" placeholder="Nhập vào địa chỉ email">
+                        </div>
+                        <div class="col-md-12">
+                            <input v-model="login.password" type="password" placeholder="Nhập vào mật khẩu">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-left mb-3">
+                                <a href="/reset-password" class="text-white">Quên mật khẩu?</a>
+                            </div>
+                            <div class="col-md-6 text-right mb-3">
+                                <a href="/register" class="text-white">Bạn chưa có tài khoản? Đăng Ký</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center mb-3">
+                                <button v-on:click="dangNhap()" class="btn pl-5 pr-5">Đăng Nhập</button>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
-                                <input name="email" type="text" placeholder="Nhập vào địa chỉ email">
+                                <p class="text-center fw-bold mx-3 mb-0 text-muted mb-3">Hoặc đăng nhập bằng</p>
                             </div>
-                            <div class="col-md-12">
-                                <input name="password" type="password" placeholder="Nhập vào mật khẩu">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-right mb-3">
+                                <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!" role="button">
+                                    <i class="fab fa-facebook-f me-2"></i>Facebook
+                                </a>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="/register" class="btn">Đăng Kí</a>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <button type="submit" class="btn">Đăng Nhập</button>
-                                </div>
+                            <div class="col-md-6 text-left">
+                                <a class="btn btn-primary btn-lg btn-block" style="background-color: rgb(201, 41, 41)" href="#!" role="button">
+                                    <i class="fa-brands fa-google" style="color: #ffffff;"></i>Google
+                                </a>
                             </div>
-                            <div class="row">
-                                    <p class="text-center">HOẶC</p>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,10 +79,32 @@
 @endsection
 @section('js')
 <script>
-    @if(count($errors) > 0)
-        @foreach($errors->all() as $error)
-            toastr.error("{{ $error }}");
-        @endforeach
-    @endif
+    new Vue({
+        el  :  "#app",
+        data:   {
+            login :   {},
+        },
+        methods :   {
+            dangNhap() {
+                axios
+                    .post('/login', this.login)
+                    .then((res) => {
+                        if(res.data.status) {
+                            toastr.success(res.data.message);
+                            setTimeout(() => {
+                                window.location.href = '/';
+                            }, 2000);
+                        } else {
+                            toastr.error(res.data.message);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0]);
+                        });
+                    });
+            },
+        },
+    });
 </script>
 @endsection
