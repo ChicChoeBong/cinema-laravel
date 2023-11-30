@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
-use App\Models\LoginFacebook;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
@@ -34,17 +34,28 @@ class LoginFacebookController extends Controller
     }
 
     protected function registrationOrLogin($data){
-        $user = LoginFacebook::where('email',$data->email)->first();
+        $user = User::where('email',$data->email)->first();
         if(!$user){
-            $user = new LoginFacebook;
+            $user = new User;
             $user->name = $data->name;
             $user->email = $data->email;
             $user->provider_id = $data->id;
             $user->avatar = $data->avatar;
+            $user->token = $data->token;
             $user->save();
         }
 
-        Auth::login($user);
+        $check = Auth::guard('user')->attempt($user);
+        if($check) {
+            toastr()->success("Đã đăng nhập thành công!");
+        } else {
+            toastr()->error("Vui lòng đăng nhập lại!");
+        }
+
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Đã đăng nhập tài khoản thành công'
+        ]);
     }
 
     public function index()
@@ -76,10 +87,10 @@ class LoginFacebookController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\LoginFacebook  $loginFacebook
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(LoginFacebook $loginFacebook)
+    public function show(User $user)
     {
         //
     }
@@ -87,10 +98,10 @@ class LoginFacebookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\LoginFacebook  $loginFacebook
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(LoginFacebook $loginFacebook)
+    public function edit(User $user)
     {
         //
     }
@@ -99,10 +110,10 @@ class LoginFacebookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LoginFacebook  $loginFacebook
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LoginFacebook $loginFacebook)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -110,10 +121,10 @@ class LoginFacebookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\LoginFacebook  $loginFacebook
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LoginFacebook $loginFacebook)
+    public function destroy(User $user)
     {
         //
     }
