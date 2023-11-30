@@ -90,12 +90,10 @@
                     .post('/login', this.login)
                     .then((res) => {
                         if(res.data.status) {
-                            toastr.success(res.data.message);
+                            // toastr.success(res.data.message);
                             setTimeout(() => {
                                 window.location.href = '/';
-                            }, 2000);
-                        } else {
-                            toastr.error(res.data.message);
+                            });
                         }
                     })
                     .catch((res) => {

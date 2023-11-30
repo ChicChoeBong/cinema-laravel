@@ -56,7 +56,7 @@ Route::post('/reset-password', [CustomerController::class, 'actionResetPassword'
 //Đăng nhập Admin
 Route::get('/admin/login', [AdminController::class, 'viewLogin']);
 Route::post('/admin/login', [AdminController::class, 'actionLogin']);
-Route::get('/logout', [AdminController::class, 'actionLogout']);
+Route::get('/admin/logout', [AdminController::class, 'actionLogout']);
 
 //Lực
 //Thông tin phim đang chiếu, sắp chiếu

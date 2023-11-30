@@ -6,6 +6,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterAccountRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Http\Requests\UpdatePasswordRequest;
+use App\Jobs\SendEmailResetPassword;
 use App\Jobs\SendMailJob;
 use App\Mail\KichHoatTaiKhoanMail;
 use App\Models\Customer;
@@ -110,10 +111,16 @@ class CustomerController extends Controller
 
     public function actionResetPassword(ResetPasswordRequest $request)
     {
-        $customer = Customer::where('email', $request->email)->first();
+        // $customer = Customer::where('email', $request->email)->first();
+        $dataMail['email']     = $request->email;
         $hash     = Str::uuid();
-$customer->hash_reset = $hash;
-        $customer->save();
+        $dataMail['hash_mail'] = $hash;
+        SendEmailResetPassword::dispatch($dataMail);
+
+        // return response()->json([
+        //     'status'    => true,
+        //     'message'   => 'Vui lòng kiểm tra email'
+        // ]);
 
         toastr()->success('Vui lòng kiểm tra email');
 
@@ -149,8 +156,10 @@ $customer->hash_reset = $hash;
         // SendMailJob::dispatch($dataMail);
         // End Phân JOB
 
-        toastr()->success('Đã tạo tài khoản thành công!');
-        return redirect('/thong-bao');
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Đã tạo tài khoản thành công. Vui lòng xác nhận email của bạn.'
+        ]);
     }
 
     public function viewLogin()
@@ -183,7 +192,10 @@ $customer->hash_reset = $hash;
             toastr()->error("Tài khoản hoặc mật khẩu không đúng!");
         }
 
-        return redirect('/');
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Đã đăng nhập tài khoản thành công'
+        ]);
     }
 
     public function actionActive($hash)
