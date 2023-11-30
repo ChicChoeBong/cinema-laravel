@@ -243,6 +243,7 @@ class CustomerController extends Controller
 public function actionLogout()
     {
         Auth::guard('customer')->logout();
+        Auth::logout();
 
         return redirect('/');
     }

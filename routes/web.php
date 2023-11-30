@@ -37,13 +37,14 @@ Route::get('/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']
 Route::get('chinh-sach-rieng-tu', function(){
     return '<h1>Chính sách riêng tư</h1>';
 });
-Route::get('auth/facebook', function(){
-    return Socialite::driver('facebook')->redirect();
-});
-Route::get('auth/facebook/callback', function(){
-    $user = Socialite::driver('facebook')->user();
-    dd($user);
-});
+// Route::get('auth/facebook', function(){
+//     return Socialite::driver('facebook')->redirect();
+// });
+// Route::get('auth/facebook/callback', function(){
+//     dd()
+//     // Log::debug([${Socialite::driver('facebook')->user()}]);
+//     // $user = Socialite::driver('facebook')->user();
+// });
 Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook']);
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'redirectToFacebookCallback']);
 
