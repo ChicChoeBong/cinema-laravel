@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\LoginFacebook;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
@@ -30,7 +30,21 @@ class LoginFacebookController extends Controller
     public function redirectToFacebookCallback(){
         $user = Socialite::driver('facebook')->user();
         $this->registrationOrLogin($user);
-        return redirect()->route('/');
+        return redirect('/');
+    }
+
+    protected function registrationOrLogin($data){
+        $user = LoginFacebook::where('email',$data->email)->first();
+        if(!$user){
+            $user = new LoginFacebook;
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->provider_id = $data->id;
+            $user->avatar = $data->avatar;
+            $user->save();
+        }
+
+        Auth::login($user);
     }
 
     public function index()
