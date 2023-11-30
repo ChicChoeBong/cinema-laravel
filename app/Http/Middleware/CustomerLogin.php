@@ -11,12 +11,17 @@ class CustomerLogin
     public function handle(Request $request, Closure $next)
     {
         $check = Auth::guard('customer')->check();
-        if($check) {
+        $check_soc = Auth::guard('user')->check();
+        if($check || $check_soc) {
             $user = Auth::guard('customer')->user();
-            if($user->loai_tai_khoan <= 0) {
-                toastr()->error('Tài khoản của bạn không đủ quyền truy cập!');
-                return redirect('/login');
+            // $user_soc = Auth::guard('user')->user();
+            if ($user !== null) {
+                if($user->loai_tai_khoan <= 0) {
+                    toastr()->error('Tài khoản của bạn không đủ quyền truy cập!');
+                    return redirect('/login');
+                }
             }
+
             return $next($request);
         } else {
             toastr()->error('Chức năng này yêu cầu phải đăng nhập!');
