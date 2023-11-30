@@ -37,7 +37,8 @@ Route::get('auth/facebook', function(){
     return Socialite::driver('facebook')->redirect();
 });
 Route::get('auth/facebook/callback', function(){
-    return 'Callback login facebook';
+    $user = Socialite::driver('github')->user();
+    dd($user);
 });
 
 
