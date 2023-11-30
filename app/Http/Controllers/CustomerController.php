@@ -100,7 +100,7 @@ class CustomerController extends Controller
     public function viewUpdatePassword($hash)
     {
         $customer = Customer::where('hash_reset', $hash)->first();
-
+        // dd($customer);
         if($customer) {
             return view('client.cap_nhat_mat_khau', compact('hash'));
         } else {
@@ -111,20 +111,38 @@ class CustomerController extends Controller
 
     public function actionResetPassword(ResetPasswordRequest $request)
     {
-        // $customer = Customer::where('email', $request->email)->first();
-        $dataMail['email']     = $request->email;
-        $hash     = Str::uuid();
-        $dataMail['hash_mail'] = $hash;
-        SendEmailResetPassword::dispatch($dataMail);
+        // $dataReset['email']     = $request->email;
+        // $hash     = Str::uuid();
+        // $dataReset['hash_reset'] = $hash;
+        // SendEmailResetPassword::dispatch($dataReset);
 
-        // return response()->json([
-        //     'status'    => true,
-        //     'message'   => 'Vui lòng kiểm tra email'
-        // ]);
+        // toastr()->success('Vui lòng kiểm tra email');
 
-        toastr()->success('Vui lòng kiểm tra email');
+        // return redirect()->back();
 
-        return redirect()->back();
+
+        // Kiểm tra email có tồn tại trong database
+        $customer = Customer::where('email', $request->email)->first();
+
+        if (!$customer) {
+            return response()->json([
+                'status'  => false,
+                'message' => 'Email không tồn tại trong hệ thống',
+            ]);
+        }
+
+        // Tạo hash_reset và gửi email
+        $hash = Str::uuid();
+        $customer->hash_reset = $hash;
+        $customer->save();
+
+        SendEmailResetPassword::dispatch(['email' => $request->email, 'hash_reset' => $hash]);
+
+        // Thông báo hoặc trả về JSON
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Vui lòng xác nhận email của bạn để đổi mật khẩu.'
+        ]);
     }
 
     public function viewResetPassword()
@@ -152,9 +170,6 @@ class CustomerController extends Controller
         $dataMail['hash_mail'] = $hash;
 
         SendMailJob::dispatch($dataMail);
-
-        // SendMailJob::dispatch($dataMail);
-        // End Phân JOB
 
         return response()->json([
             'status'    => true,

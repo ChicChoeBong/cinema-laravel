@@ -1,6 +1,6 @@
 @extends('client.master')
 @section('content')
-<section class="contact-area contact-bg" data-background="/assets_client/img/bg/contact_bg.jpg" style="background-image: url(&quot;img/bg/contact_bg.jpg&quot;);">
+<section id="app" class="contact-area contact-bg" data-background="/assets_client/img/bg/contact_bg.jpg" style="background-image: url(&quot;img/bg/contact_bg.jpg&quot;);">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-lg-7">
@@ -9,19 +9,12 @@
                         <h5 class="title">Đăng Nhập</h5>
                     </div>
                     <div class="contact-form">
-                        <form action="/reset-password" method="post">
-                            @csrf
-                            <div class="col-md-12">
-                                <input name="email" type="text" placeholder="Nhập vào địa chỉ email">
-                            </div>
-                            <div class="col-md-12">
-                                {!! NoCaptcha::renderJs() !!}
-                                {!! NoCaptcha::display() !!}
-                            </div>
-                            <div class="col-md-12 text-right">
-                                <button type="submit" class="btn">Quên Mật Khẩu</button>
-                            </div>
-                        </form>
+                        <div class="col-md-12">
+                            <input v-model="reset_password.email" type="text" placeholder="Nhập vào địa chỉ email">
+                        </div>
+                        <div class="col-md-12 text-right">
+                            <button v-on:click="doiMatKhau()" class="btn">Quên Mật Khẩu</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,10 +48,30 @@
 @endsection
 @section('js')
 <script>
-    @if(count($errors) > 0)
-        @foreach($errors->all() as $error)
-            toastr.error("{{ $error }}");
-        @endforeach
-    @endif
+    new Vue({
+        el  :  "#app",
+        data:   {
+            reset_password :   {},
+        },
+        methods :   {
+            doiMatKhau() {
+                axios
+                    .post('/reset-password', this.reset_password)
+                    .then((res) => {
+                        if(res.data.status) {
+                            toastr.success(res.data.message);
+                            setTimeout(() => {
+                                window.location.href = '/reset-password';
+                            }, 3000);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0]);
+                        });
+                    });
+            },
+        },
+    });
 </script>
 @endsection
