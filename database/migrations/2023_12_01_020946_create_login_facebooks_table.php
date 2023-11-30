@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('login_facebooks', function (Blueprint $table) {
+        Schema::create('login_facebook', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->string('provider_id')->nullable();
+            $table->string('avatar')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
