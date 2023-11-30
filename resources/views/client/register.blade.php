@@ -91,7 +91,7 @@
                             toastr.success(res.data.message);
                             setTimeout(() => {
                                 window.location.href = '/thong-bao';
-                            }, 5000);
+                            });
                         } else {
                             toastr.error(res.data.message);
                         }
