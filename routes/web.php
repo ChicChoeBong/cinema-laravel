@@ -85,6 +85,8 @@ Route::get('/auto', [GiaoDichController::class, 'auto']);
 //Auto huỷ vé
 Route::get('/e48c2936-ec56-4452-8e01-9ce7f1b38952', [GheBanController::class, 'huyVeAuto']);
 
+
+Route::get('/admin/khach-hang/active/{hash}', [CustomerController::class, 'actionActive']);
 //Admin
 Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
     Route::get('/', [AdminController::class, 'viewHome']);
@@ -99,7 +101,6 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
     //H.Phúc
     //Quản lý tài khoản khách hàng
     Route::group(['prefix' => '/khach-hang'], function() {
-        Route::get('/active/{hash}', [CustomerController::class, 'actionActive']);
         Route::get('/active/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
         Route::get('/thong-tin', [CustomerController::class, 'viewThongTin']);
         Route::get('/data', [CustomerController::class, 'getData']);
