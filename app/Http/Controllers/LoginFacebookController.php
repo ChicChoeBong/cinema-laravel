@@ -34,7 +34,7 @@ class LoginFacebookController extends Controller
     }
 
     protected function registrationOrLogin($data){
-        $user = User::where('email', $data->email)->first();
+        $user = User::where('provider_id', $data->id)->first();
         if(!$user){
             $user = new User;
             $user->name = $data->name;
@@ -45,19 +45,21 @@ class LoginFacebookController extends Controller
             $user->save();
         }
 
-        $temp['email'] = $data->email;
-        $temp['password'] = $data->password;
-        $check = Auth::guard('user')->attempt($temp);
-        if($check) {
-            toastr()->success("Đã đăng nhập thành công!");
-        } else {
-            toastr()->error("Vui lòng đăng nhập lại!");
-        }
+        Auth::login($user);
+        // $user_temp['provider_id'] = $user->provider_id;
+        // $user_temp['password'] = $user->password;
 
-        return response()->json([
-            'status'    => true,
-            'message'   => 'Đã đăng nhập tài khoản thành công'
-        ]);
+        // $check = Auth::guard('user')->attempt($user_temp);
+        // if($check) {
+        //     toastr()->success("Đã đăng nhập thành công!");
+        // } else {
+        //     toastr()->error("Vui lòng đăng nhập lại!");
+        // }
+
+        // return response()->json([
+        //     'status'    => true,
+        //     'message'   => 'Đã đăng nhập tài khoản thành công'
+        // ]);
     }
 
     public function index()

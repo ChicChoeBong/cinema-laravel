@@ -1,9 +1,8 @@
 <header class="header-style-two">
     @php
         $check = Auth::guard('customer')->check();
-        $check_soc = Auth::guard('user')->check_soc();
         $user  = Auth::guard('customer')->user();
-        $user_soc = Auth::guard('user')->user();
+        $user_soc = Auth::user();
     @endphp
     <div class="header-top-wrap">
         <div class="container custom-container">
@@ -16,7 +15,7 @@
                 <div class="col-md-6">
                     <div class="header-top-link">
                         <ul class="quick-link">
-                            @if ($check || $check_soc)
+                            @if ($check || $user_soc !== null)
                                 <li><a href="#">Chào Bạn, {{ $user->ho_va_ten ?? $user_soc->name }}</a></li>
                             @else
                                 <li><a href="#">About Us</a></li>
@@ -71,7 +70,7 @@
                                         </div>
                                     </li>
 
-                                    @if ($check || $check_soc)
+                                    @if ($check || $user_soc !== null)
                                         <div class="navbar-wrap main-menu d-none d-lg-flex">
                                             <ul class="navigation">
                                                 <li class="active menu-item-has-children ml-4"><a href="#"><i class="fa-solid fa-user fa-2x"></i></a>
