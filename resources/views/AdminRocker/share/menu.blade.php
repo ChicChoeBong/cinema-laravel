@@ -13,7 +13,7 @@
         <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
             <li class="nav-item">
                 <a class="nav-link" href="/admin/cau-hinh/index">
-                    <div class="parent-icon"><i class="bx bx-cookie"></i>
+                    <div class="parent-icon"><i class="fa-solid fa-laptop"></i>
                     </div>
                     <div class="menu-title">Cấu Hình Hệ Thống</div>
                 </a>
@@ -27,7 +27,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/admin/phong/index">
-                    <div class="parent-icon"><i class="bx bx-cookie"></i>
+                    <div class="parent-icon"><i class="fa-solid fa-door-open"></i>
                     </div>
                     <div class="menu-title">Quản Lý Phòng</div>
                 </a>
@@ -35,7 +35,7 @@
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
                     data-bs-toggle="dropdown">
-                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    <div class="parent-icon"><i class="fa-regular fa-user"></i>
                     </div>
                     <div class="menu-title">Quản Lý Tài Khoản</div>
                 </a>
@@ -49,7 +49,7 @@
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
                     data-bs-toggle="dropdown">
-                    <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                    <div class="parent-icon"><i class="fa-solid fa-film"></i>
                     </div>
                     <div class="menu-title">Quản Lý Lịch Chiếu</div>
                 </a>

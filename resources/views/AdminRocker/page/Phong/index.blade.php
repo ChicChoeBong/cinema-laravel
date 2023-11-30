@@ -37,7 +37,7 @@
                 <div class="card-header">
                     Danh Sách Các Phòng
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table id="table" class="table table-bordered">
                         <thead class="bg-primary">
                             <tr>
@@ -54,7 +54,7 @@
                                 <th class="align-middle text-center">@{{ key + 1 }}</th>
                                 <td class="align-middle">@{{ value.ten_phong }}</td>
                                 <td class="align-middle text-center text-nowrap">
-                                    <button v-on:click="changeStatus(value.id)" class="btn btn-danger" v-if="value.tinh_trang == 0">Dừng Kinh Doanh</button>
+                                    <button v-on:click="changeStatus(valgue.id)" class="btn btn-danger" v-if="value.tinh_trang == 0">Dừng Kinh Doanh</button>
                                     <button v-on:click="changeStatus(value.id)" class="btn btn-primary" v-else>Còn Kinh Doanh</button>
                                 </td>
                                 <td class="align-middle text-center">@{{ value.hang_doc }}</td>

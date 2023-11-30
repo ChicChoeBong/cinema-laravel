@@ -25,6 +25,9 @@
                                     <button type="submit" class="btn">Đăng Nhập</button>
                                 </div>
                             </div>
+                            <div class="row">
+                                    <p class="text-center">HOẶC</p>
+                            </div>
                         </form>
                     </div>
                 </div>
