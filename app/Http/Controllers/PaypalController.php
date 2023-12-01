@@ -22,8 +22,8 @@ class PaypalController extends Controller
             "purchase_units" => [
                 [
                     "amount" => [
-                        "currency_code" => "VNĐ",
-                        "value" => $request->price
+                        "currency_code" => "USD",
+                        "value" => $request->price/23000
                     ]
                 ]
             ]
