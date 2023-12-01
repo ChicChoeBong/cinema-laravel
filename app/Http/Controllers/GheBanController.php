@@ -137,8 +137,12 @@ class GheBanController extends Controller
 
         $dataMail['phim'] = $phim->ten_phim;
         $dataMail['thoi_gian'] = $phim->ngay_khoi_chieu;
-        $dataMail['ho_va_ten'] = $user->ho_va_ten;
-        $dataMail['email'] = $user->email;
+        $dataMail['ho_va_ten'] = $user->ho_va_ten ?? $user_soc->name;
+        $dataMail['email'] = $user->email ?? $user_soc->email ?? '';
+
+        if ($dataMail['email'] == '') {
+            return redirect('/')->toastr()->success("Cảm ơn quý khách đã sử dụng dịch vụ!");
+        }
         $dataMail['ghe'] = '';
         foreach($dsGheBan as $key => $value) {
             $value->trang_thai = 1;
