@@ -17,6 +17,7 @@ use App\Models\QuanLyBaiViet;
 use App\Models\QuanLyKhachHang;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\PaypalController;
 
 //Ngân
 Route::get('/', [HomepageController::class, 'index']);
@@ -85,6 +86,10 @@ Route::group(['prefix' => '/client', 'middleware' => 'loginCustomer'],function()
     Route::get('/thanh-toan', [GheBanController::class, 'thanhToan']);
     Route::get('/done', [GheBanController::class, 'done']);
 });
+
+Route::post('paypal', [PaypalController::class, 'paypal'])->name('paypal');
+Route::get('success', [PaypalController::class, 'success'])->name('success');
+Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
 //Quốc
 //Thanh toán bên thứ 3
 Route::get('/auto', [GiaoDichController::class, 'auto']);
