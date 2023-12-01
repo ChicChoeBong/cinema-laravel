@@ -15,16 +15,13 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'email'                 =>  'required|email|exists:customers,email',
-            // 'g-recaptcha-response'  => 'required|captcha',
         ];
     }
 
     public function messages()
     {
         return [
-            'email.email'             =>  'Email không đúng định dạng',
-            'email.exists'            =>  'Email không tồn tại trong hệ thống',
-            'g-recaptcha-response.*'  =>  'Vui lòng phải chọn vào recaptcha',
+            'email.*'               =>  'Email không tồn tại hoặc không đúng định dạng',
         ];
     }
 }

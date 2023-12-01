@@ -32,8 +32,14 @@ return [
     ],
 
     'facebook' => [
-        'client_id' => '1317729982220190',
-        'client_secret' => '6323319dcf4dc0f56e57e656827ba3cc',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect' => '/auth/facebook/callback',
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => '/auth/google/callback',
     ],
 ];

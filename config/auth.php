@@ -38,7 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users_soc',
+        ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users_soc',
+            'hash' => false,
         ],
         'customer' => [
             'driver' => 'session',
@@ -52,7 +57,7 @@ return [
 
 
     'providers' => [
-        'users' => [
+        'users_soc' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],

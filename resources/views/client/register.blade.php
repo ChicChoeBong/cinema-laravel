@@ -1,6 +1,6 @@
 @extends('client.master')
 @section('content')
-<section class="contact-area contact-bg" data-background="/assets_client/img/bg/contact_bg.jpg" style="background-image: url(&quot;img/bg/contact_bg.jpg&quot;);">
+<section class="contact-area contact-bg" id="app" data-background="/assets_client/img/bg/contact_bg.jpg" style="background-image: url(&quot;img/bg/contact_bg.jpg&quot;);">
     <div class="container">
         <div class="row">
             <div class="col-xl-8 col-lg-7">
@@ -9,72 +9,41 @@
                         <h5 class="title">Đăng Ký Tài Khoản</h5>
                     </div>
                     <div class="contact-form">
-                        <form method="post" action="/register">
-                            @csrf
-                            <div class="col-md-12">
-                                {{-- @error('ho_va_ten')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <input name="ho_va_ten" type="text"  placeholder="Nhập vào họ và tên">
+                        <div class="col-md-12">
+                            <input v-model="register.ho_va_ten" type="text"  placeholder="Nhập vào họ và tên">
+                        </div>
+                        <div class="col-md-12">
+                            <input v-model="register.email" type="email"  placeholder="Nhập vào email">
+                        </div>
+                        <div class="col-md-12">
+                            <input v-model="register.so_dien_thoai" type="tel"  placeholder="Nhập vào số điện thoại">
+                        </div>
+                        <div class="col-md-12">
+                            <input v-model="register.dia_chi" type="text"  placeholder="Nhập vào địa chỉ">
+                        </div>
+                        <div class="col-md-12">
+                            <input v-model="register.ngay_sinh" type="date"  placeholder="Nhập vào ngày sinh">
+                        </div>
+                        <div class="col-md-12">
+                            <input v-model="register.password" type="password"  placeholder="Nhập vào mật khẩu">
+                        </div>
+                        <div class="col-md-12">
+                            <input v-model="register.re_password" type="password"  placeholder="Nhập lại mật khẩu">
+                        </div>
+                        <div class="col-md-12">
+                            <select v-model="register.gioi_tinh" style="background-color: #1f1e24; color: #bcbcbc; border: 1px solid #1f1e24; padding: 14px 25px; margin-bottom: 30px; width: 100%;">
+                                <option value="1">Giới Tính Nam</option>
+                                <option value="0">Giới Tính Nữ</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="/login" class="btn">Đăng Nhập</a>
                             </div>
-                            <div class="col-md-12">
-                                {{-- @error('email')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <input name="email" type="email"  placeholder="Nhập vào email">
+                            <div class="col-md-6 text-right">
+                                <button v-on:click="dangKy()" class="btn">Đăng Ký</button>
                             </div>
-                            <div class="col-md-12">
-                                {{-- @error('so_dien_thoai')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <input name="so_dien_thoai" type="tel"  placeholder="Nhập vào số điện thoại">
-                            </div>
-                            <div class="col-md-12">
-                                {{-- @error('dia_chi')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <input name="dia_chi" type="text"  placeholder="Nhập vào địa chỉ">
-                            </div>
-                            <div class="col-md-12">
-                                {{-- @error('ngay_sinh')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <input name="ngay_sinh" type="date"  placeholder="Nhập vào ngày sinh">
-                            </div>
-                            <div class="col-md-12">
-                                {{-- @error('password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <input name="password" type="password"  placeholder="Nhập vào mật khẩu">
-                            </div>
-                            <div class="col-md-12">
-                                {{-- @error('re_password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <input name="re_password" type="password"  placeholder="Nhập lại mật khẩu">
-                            </div>
-                            <div class="col-md-12">
-                                {{-- @error('gioi_tinh')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror --}}
-                                <select name="gioi_tinh" style="background-color: #1f1e24; color: #bcbcbc; border: 1px solid #1f1e24; padding: 14px 25px; margin-bottom: 30px; width: 100%;">
-                                    <option value="1">Giới Tính Nam</option>
-                                    <option value="0">Giới Tính Nữ</option>
-                                </select>
-                            </div>
-                            {{-- <div class="col-md-12">
-                                {!! NoCaptcha::renderJs() !!}
-                                {!! NoCaptcha::display() !!}
-                            </div> --}}
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <a href="/login" class="btn">Đăng Nhập</a>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <button type="submit" class="btn">Đăng Ký</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -108,10 +77,32 @@
 @endsection
 @section('js')
 <script>
-    @if(count($errors) > 0)
-        @foreach($errors->all() as $error)
-            toastr.error("{{ $error }}");
-        @endforeach
-    @endif
+    new Vue({
+        el  :  "#app",
+        data:   {
+            register :   {},
+        },
+        methods :   {
+            dangKy() {
+                axios
+                    .post('/register', this.register)
+                    .then((res) => {
+                        if(res.data.status) {
+                            toastr.success(res.data.message);
+                            setTimeout(() => {
+                                window.location.href = '/thong-bao';
+                            });
+                        } else {
+                            toastr.error(res.data.message);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0]);
+                        });
+                    });
+            },
+        },
+    });
 </script>
 @endsection

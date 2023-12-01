@@ -15,15 +15,11 @@
                                 <input name="hash_reset" type="hidden" value="{{ $hash }}">
                             </div>
                             <div class="col-md-12">
-                                <input name="password" type="text" placeholder="Nhập vào mật khẩu">
+                                <input name="password" type="password" placeholder="Nhập vào mật khẩu">
                             </div>
                             <div class="col-md-12">
-                                <input name="re_password" type="text" placeholder="Nhập lại mật khẩu">
+                                <input name="re_password" type="password" placeholder="Nhập lại mật khẩu">
                             </div>
-                            {{-- <div class="col-md-12">
-                                {!! NoCaptcha::renderJs() !!}
-                                {!! NoCaptcha::display() !!}
-                            </div> --}}
                             <div class="col-md-12 text-right">
                                 <button type="submit" class="btn">Đổi Mật Khẩu</button>
                             </div>
@@ -36,20 +32,20 @@
                     <h5 class="title">Thông Tin Về Chúng Tôi</h5>
                 </div>
                 <div class="contact-info-wrap">
-                    <p><span>Find solutions :</span> to common problems, or get help from a support agent industry's standard .</p>
+                    <p><span>ChicBong Cinema :</span> Tận hưởng từng khoảnh khắc của bạn</p>
                     <div class="contact-info-list">
                         <ul>
                             <li>
                                 <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                                <p><span>Address :</span> W38 Park Road New York</p>
+                                <p><span>Địa chỉ :</span> 42 Cao Thắng, Thanh Bình, Hải Châu, Đà Nẵng</p>
                             </li>
                             <li>
                                 <div class="icon"><i class="fas fa-phone-alt"></i></div>
-                                <p><span>Phone :</span> (09) 123 854 365</p>
+                                <p><span>Điện thoại :</span> 0123456789</p>
                             </li>
                             <li>
                                 <div class="icon"><i class="fas fa-envelope"></i></div>
-                                <p><span>Email :</span> support@movflx.com</p>
+                                <p><span>Email :</span> chicbong@gmail.com</p>
                             </li>
                         </ul>
                     </div>

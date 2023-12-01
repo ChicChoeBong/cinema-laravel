@@ -96,9 +96,10 @@ class GheBanController extends Controller
         // 2.1. Nếu như nó không có đặt ghế nào => chửi cái
         // 2.2. Nếu có thì mình tạo ra cái mã giao dịch => hiển thị ra view
         $user = Auth::guard('customer')->user();
-        $dsGheBan = GheBan::where('id_khach_hang', $user->id)->where('trang_thai', 2)->get();
+        $user_soc = Auth::user();
+        $dsGheBan = GheBan::where('id_khach_hang', $user->id ?? $user_soc->provider_id)->where('trang_thai', 2)->get();
         if(count($dsGheBan) == 0) {
-            toastr()->error('Bạn chưa có đặt chổ nên không thể thanh toán');
+            toastr()->error('Bạn chưa có đặt chỗ nên không thể thanh toán');
             return redirect('/');
         }
         $phim = Phim::join('lich_chieus', 'phims.id', 'lich_chieus.id_phim')
@@ -122,9 +123,10 @@ class GheBanController extends Controller
     public function done()
     {
         $user = Auth::guard('customer')->user();
-        $dsGheBan = GheBan::where('id_khach_hang', $user->id)->where('trang_thai', 2)->get();
+        $user_soc = Auth::user();
+        $dsGheBan = GheBan::where('id_khach_hang', $user->id ?? $user_soc->provider_id)->where('trang_thai', 2)->get();
         if(count($dsGheBan) == 0) {
-            toastr()->error('Bạn chưa có đặt chổ nên không thể thanh toán');
+            toastr()->error('Bạn chưa có đặt chỗ nên không thể thanh toán');
             return redirect('/');
         }
         $phim = Phim::join('lich_chieus', 'phims.id', 'lich_chieus.id_phim')

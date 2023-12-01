@@ -7,6 +7,7 @@ use App\Http\Controllers\GheBanController;
 use App\Http\Controllers\GiaoDichController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LichChieuController;
+use App\Http\Controllers\LoginSocialController;
 use App\Http\Controllers\PhimController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\QuanLyBaiVietController;
@@ -16,6 +17,7 @@ use App\Models\QuanLyBaiViet;
 use App\Models\QuanLyKhachHang;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\PaypalController;
 
 //Ngân
 Route::get('/', [HomepageController::class, 'index']);
@@ -29,17 +31,26 @@ Route::post('/register', [CustomerController::class, 'actionRegister']);
 Route::get('/logout', [CustomerController::class, 'actionLogout']);
 Route::get('/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
 
-
-Route::get('/chinh-sach-rieng-tu', function () {
+// Route::get('/', function(){
+//     echo env('APP_URL');
+//     return view('welcome');
+// })->name('home');
+Route::get('chinh-sach-rieng-tu', function(){
     return '<h1>Chính sách riêng tư</h1>';
 });
-Route::get('/auth/facebook', function () {
-    return Socialite::driver('facebook')->redirect();
-});
-Route::get('/auth/facebook/callback', function () {
-    return 'Callback login facebook';
-});
+// Route::get('auth/facebook', function(){
+//     return Socialite::driver('facebook')->redirect();
+// });
+// Route::get('auth/facebook/callback', function(){
+//     dd()
+//     // Log::debug([${Socialite::driver('facebook')->user()}]);
+//     // $user = Socialite::driver('facebook')->user();
+// });
+Route::get('auth/facebook', [LoginSocialController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [LoginSocialController::class, 'redirectToFacebookCallback']);
 
+Route::get('auth/google', [LoginSocialController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [LoginSocialController::class, 'redirectToGoogleCallback']);
 
 //Mạnh
 //Reset password
@@ -56,7 +67,7 @@ Route::post('/reset-password', [CustomerController::class, 'actionResetPassword'
 //Đăng nhập Admin
 Route::get('/admin/login', [AdminController::class, 'viewLogin']);
 Route::post('/admin/login', [AdminController::class, 'actionLogin']);
-Route::get('/logout', [AdminController::class, 'actionLogout']);
+Route::get('/admin/logout', [AdminController::class, 'actionLogout']);
 
 //Lực
 //Thông tin phim đang chiếu, sắp chiếu
@@ -76,8 +87,12 @@ Route::group(['prefix' => '/client', 'middleware' => 'loginCustomer'], function 
     Route::post('/dat-ve/giu-cho', [GheBanController::class, 'giuChoDatVe']);
     Route::post('/dat-ve/huy-cho', [GheBanController::class, 'huyChoDatVe']);
     Route::get('/thanh-toan', [GheBanController::class, 'thanhToan']);
-    Route::get('/done', [GheBanController::class, 'done']);
+    Route::get('/done', [GheBanController::class, 'done'])->name('done');
 });
+
+Route::post('paypal', [PaypalController::class, 'paypal'])->name('paypal');
+Route::get('success', [PaypalController::class, 'success'])->name('success');
+Route::get('cancel', [PaypalController::class, 'cancel'])->name('cancel');
 //Quốc
 //Thanh toán bên thứ 3
 Route::get('/auto', [GiaoDichController::class, 'auto']);
@@ -85,6 +100,8 @@ Route::get('/auto', [GiaoDichController::class, 'auto']);
 //Auto huỷ vé
 Route::get('/e48c2936-ec56-4452-8e01-9ce7f1b38952', [GheBanController::class, 'huyVeAuto']);
 
+
+Route::get('/admin/khach-hang/active/{hash}', [CustomerController::class, 'actionActive']);
 //Admin
 Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'], function () {
     Route::get('/', [AdminController::class, 'viewHome']);
@@ -98,8 +115,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'], function () {
 
     //H.Phúc
     //Quản lý tài khoản khách hàng
-    Route::group(['prefix' => '/khach-hang'], function () {
-        Route::get('/active/{hash}', [CustomerController::class, 'actionActive']);
+    Route::group(['prefix' => '/khach-hang'], function() {
         Route::get('/active/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
         Route::get('/thong-tin', [CustomerController::class, 'viewThongTin']);
         Route::get('/data', [CustomerController::class, 'getData']);

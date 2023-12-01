@@ -95,6 +95,7 @@
                                             </li>
                                         </ul>
                                     </div>
+
                                     <a href="{{ $phim_2->trailer }}"
                                         class="banner-btn btn popup-video" data-animation="fadeInUp"
                                         data-delay=".8s"><i class="fas fa-play"></i> Xem Ngay</a>
@@ -116,7 +117,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="banner-content">
-                                    <h6 class="sub-title" data-animation="fadeInUp" data-delay=".2s">DZFULLSTACK</h6>
+                                    <h6 class="sub-title" data-animation="fadeInUp" data-delay=".2s">CHICBONG</h6>
                                     <h2 class="title" data-animation="fadeInUp" data-delay=".4s">{{ $phim_3->ten_phim }}</h2>
                                     <div class="banner-meta" data-animation="fadeInUp" data-delay=".6s">
                                         <ul>
@@ -289,7 +290,7 @@
                 </div>
                 <div class="row movie-item-row">
                     @foreach ($list_phim as $key => $value)
-                        @if ($value->tinh_trang != 2)
+                        @if ($value->tinh_trang == 2)
                         <div class="custom-col-">
                             <div class="movie-item movie-item-two">
                                 <div class="movie-poster">
