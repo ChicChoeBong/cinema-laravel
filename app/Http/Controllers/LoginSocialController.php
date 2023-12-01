@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use Laravel\Socialite\Facades\Socialite;
 
-class LoginFacebookController extends Controller
+class LoginSocialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class LoginFacebookController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('/logout');
     }
 
     //facebook redirect
@@ -29,6 +29,18 @@ class LoginFacebookController extends Controller
     //facebook callback
     public function redirectToFacebookCallback(){
         $user = Socialite::driver('facebook')->user();
+        $this->registrationOrLogin($user);
+        return redirect('/');
+    }
+
+    //google redirect
+    public function redirectToGoogle(){
+        return Socialite::driver('google')->redirect();
+    }
+
+    //google callback
+    public function redirectToGoogleCallback(){
+        $user = Socialite::driver('google')->user();
         $this->registrationOrLogin($user);
         return redirect('/');
     }

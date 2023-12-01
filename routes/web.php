@@ -7,7 +7,7 @@ use App\Http\Controllers\GheBanController;
 use App\Http\Controllers\GiaoDichController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\LichChieuController;
-use App\Http\Controllers\LoginFacebookController;
+use App\Http\Controllers\LoginSocialController;
 use App\Http\Controllers\PhimController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\QuanLyBaiVietController;
@@ -46,8 +46,11 @@ Route::get('chinh-sach-rieng-tu', function(){
 //     // Log::debug([${Socialite::driver('facebook')->user()}]);
 //     // $user = Socialite::driver('facebook')->user();
 // });
-Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook']);
-Route::get('auth/facebook/callback', [LoginFacebookController::class, 'redirectToFacebookCallback']);
+Route::get('auth/facebook', [LoginSocialController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [LoginSocialController::class, 'redirectToFacebookCallback']);
+
+Route::get('auth/google', [LoginSocialController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [LoginSocialController::class, 'redirectToGoogleCallback']);
 
 //Mạnh
 //Reset password
