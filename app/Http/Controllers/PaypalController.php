@@ -63,10 +63,7 @@ class PaypalController extends Controller
             $payment->payment_method = "PayPal";
             $payment->save();
 
-            return response()->json([
-                'status' => true,
-                'messs'  => "Payment is successful!",
-            ]);
+            return('toastr.success("Đã thanh toán thành công!")');
             unset($_SESSION['product_name']);
             unset($_SESSION['quantity']);
 
@@ -76,9 +73,6 @@ class PaypalController extends Controller
     }
     public function cancel()
     {
-        return response()->json([
-            'status' => false,
-            'messs'  => "Payment is cancelled.",
-        ]);
+        return('toastr.error("Đã hết thời gian thanh toán")');
     }
 }
