@@ -38,7 +38,7 @@
                                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             <span class="season">Tổng Tiền Thanh Toán</span>
                                             <span class="video-count"
-                                                name="price">{{ number_format($tongVe * 15, 0, '.', ',') }} vnđ</span>
+                                                name="price" value="{{ number_format($tongVe * 45000, 0, '.', ',') }}">{{ number_format($tongVe * 45000, 0, '.', ',') }} VNĐ</span>
                                         </button>
                                         {{-- <button class="btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <span class="season">Thanh Toán Ngân Hàng VCB</span>
