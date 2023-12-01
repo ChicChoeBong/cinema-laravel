@@ -86,113 +86,113 @@
                     </tbody>
                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Bạn có muốn xóa lịch chiếu phim <b class="text-danger">@{{ delete_lich.ten_phim }}</b> tại phòng <b class="text-danger">@{{ delete_lich.ten_phong }}</b> này không?</p>
+                                    <p>Thời gian chiếu dự kiến từ @{{ delete_lich.thoi_gian_bat_dau }} đến @{{ delete_lich.thoi_gian_ket_thuc }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button v-on:click="xoaLichChieu()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Xóa Lịch</button>
+                                </div>
                             </div>
-                            <div class="modal-body">
-                            <p>Bạn có muốn xóa lịch chiếu phim <b class="text-danger">@{{ delete_lich.ten_phim }}</b> tại phòng <b class="text-danger">@{{ delete_lich.ten_phong }}</b> này không?</p>
-                            <p>Thời gian chiếu dự kiến từ @{{ delete_lich.thoi_gian_bat_dau }} đến @{{ delete_lich.thoi_gian_ket_thuc }}</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                              <button v-on:click="xoaLichChieu()" type="button" class="btn btn-primary"  data-bs-dismiss="modal">Xóa Lịch</button>
-                            </div>
-                          </div>
                         </div>
                     </div>
                     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Cập nhật lịch chiếu phim</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Chọn Phim</label>
-                                        <select v-on:change="updateThoiGian()" v-model="update_lich.id_phim" class="form-control">
-                                            <template v-for="(value, key) in list_phim" v-if="value.tinh_trang > 0">
-                                                <option v-bind:value="value.id">@{{ value.ten_phim }}</option>
-                                            </template>
-                                        </select>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Cập nhật lịch chiếu phim</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Chọn Phim</label>
+                                            <select v-on:change="updateThoiGian()" v-model="update_lich.id_phim" class="form-control">
+                                                <template v-for="(value, key) in list_phim" v-if="value.tinh_trang > 0">
+                                                    <option v-bind:value="value.id">@{{ value.ten_phim }}</option>
+                                                </template>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Thời Lượng Chiếu Chính</label>
+                                            <input v-model="update_lich.thoi_gian_chieu_chinh" type="number" min="0" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Thời Lượng Quảng Cáo</label>
+                                            <input v-model="update_lich.thoi_gian_quang_cao" type="number" min="0" class="form-control">
+                                        </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Thời Lượng Chiếu Chính</label>
-                                        <input v-model="update_lich.thoi_gian_chieu_chinh" type="number" min="0" class="form-control">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Thời Lượng Quảng Cáo</label>
-                                        <input v-model="update_lich.thoi_gian_quang_cao" type="number" min="0" class="form-control">
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Ngày Chiếu Phim</label>
+                                            <input v-model="update_lich.ngay_chieu" type="date" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Giờ Bắt Đầu</label>
+                                            <input v-model="update_lich.gio_bat_dau" type="time" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Giờ Kết Thúc</label>
+                                            <input v-model="update_lich.gio_ket_thuc" type="time" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label">Phòng Chiếu Phim</label>
+                                            <select v-model="update_lich.id_phong" class="form-control">
+                                                <template v-for="(value, key) in list_phong" v-if="value.tinh_trang == 1">
+                                                    <option v-bind:value="value.id">@{{ value.ten_phong }}</option>
+                                                </template>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row mt-3">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Ngày Chiếu Phim</label>
-                                        <input v-model="update_lich.ngay_chieu" type="date" class="form-control">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Giờ Bắt Đầu</label>
-                                        <input v-model="update_lich.gio_bat_dau" type="time" class="form-control">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Giờ Kết Thúc</label>
-                                        <input v-model="update_lich.gio_ket_thuc" type="time" class="form-control">
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label">Phòng Chiếu Phim</label>
-                                        <select v-model="update_lich.id_phong" class="form-control">
-                                            <template v-for="(value, key) in list_phong" v-if="value.tinh_trang == 1">
-                                                <option v-bind:value="value.id">@{{ value.ten_phong }}</option>
-                                            </template>
-                                        </select>
-                                    </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                    <button v-on:click="capNhatLichChieu()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Cập Nhật Lịch</button>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                              <button v-on:click="capNhatLichChieu()" type="button" class="btn btn-primary"  data-bs-dismiss="modal">Cập Nhật Lịch</button>
-                            </div>
-                          </div>
                         </div>
                     </div>
                 </table>
                 <div class="modal fade" id="gheModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Danh Sách Ghế</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12 text-center">
-                                    <div class="alert alert-primary" role="alert">
-                                        <b style="font-size: 24px">MÀN HÌNH</b>
-                                     </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <table class="table table-bordered">
-                                        <tr v-for="i in (0, tt_phong.hang_ngang)">
-                                            <template v-for="j in (0, tt_phong.hang_doc)">
-                                                <td v-on:click="doiTrangThaiGhe(ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1])" v-if="ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1].co_the_ban == 1" style="background-color: #e6e7e9" class="text-center align-middle" >
-                                                    @{{ ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1].ten_ghe }}
-                                                </td>
-                                                <td v-on:click="doiTrangThaiGhe(ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1])" v-else class="bg-danger text-center align-middle text-white">
-                                                    @{{ ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1].ten_ghe }}
-                                                </td>
-                                            </template>
-                                        </tr>
-                                    </table>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Danh Sách Ghế</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <div class="alert alert-primary" role="alert">
+                                            <b style="font-size: 24px">MÀN HÌNH</b>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered">
+                                            <tr v-for="i in (0, tt_phong.hang_ngang)">
+                                                <template v-for="j in (0, tt_phong.hang_doc)">
+                                                    <td v-on:click="doiTrangThaiGhe(ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1])" v-if="ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1].co_the_ban == 1" style="background-color: #e6e7e9" class="text-center align-middle">
+                                                        @{{ ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1].ten_ghe }}
+                                                    </td>
+                                                    <td v-on:click="doiTrangThaiGhe(ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1])" v-else class="bg-danger text-center align-middle text-white">
+                                                        @{{ ds_ghe[(i - 1) * tt_phong.hang_doc +  j - 1].ten_ghe }}
+                                                    </td>
+                                                </template>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                      </div>
                     </div>
                 </div>
             </div>
@@ -204,23 +204,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script>
     new Vue({
-        el  :  "#app",
-        data:   {
-            create_lich :   {},
-            delete_lich :   {},
-            update_lich :   {},
-            list_phim   :   [],
-            list_phong  :   [],
-            list_lich   :   [],
-            tt_phong    :   {},
-            ds_ghe      :   [],
+        el: "#app",
+        data: {
+            create_lich: {},
+            delete_lich: {},
+            update_lich: {},
+            list_phim: [],
+            list_phong: [],
+            list_lich: [],
+            tt_phong: {},
+            ds_ghe: [],
         },
-        created()   {
+        created() {
             this.loadDataPhim();
             this.loadDataPhong();
             this.loadLichChieu();
         },
-        methods :   {
+        methods: {
             doiTrangThaiGhe(v) {
                 axios
                     .post('/admin/lich-chieu/danh-sach-ghe/doi-trang-thai', v)
@@ -253,8 +253,8 @@
             },
             editLich(v) {
                 this.update_lich = v;
-                this.update_lich.ngay_chieu   = moment(v.thoi_gian_bat_dau).format('YYYY-MM-DD');
-                this.update_lich.gio_bat_dau  = moment(v.thoi_gian_bat_dau).format('HH:mm');
+                this.update_lich.ngay_chieu = moment(v.thoi_gian_bat_dau).format('YYYY-MM-DD');
+                this.update_lich.gio_bat_dau = moment(v.thoi_gian_bat_dau).format('HH:mm');
                 this.update_lich.gio_ket_thuc = moment(v.thoi_gian_ket_thuc).format('HH:mm');
 
                 // update_lich.ngay_chieu   = thoi_gian_bat_dau chỉ lấy ngày tháng năm
@@ -265,7 +265,7 @@
                 axios
                     .post('/admin/lich-chieu/tao-mot-buoi', this.create_lich)
                     .then((res) => {
-                        if(res.data.status) {
+                        if (res.data.status) {
                             toastr.success(res.data.message);
                             this.loadLichChieu();
                         } else {
@@ -284,6 +284,23 @@
                     .then((res) => {
                         toastr.success('Đã xóa lịch chiếu thành công!');
                         this.loadLichChieu();
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            toastr.error(v[0]);
+                        });
+                    });
+            },
+            capNhatLichChieu() {
+                axios
+                    .post('/admin/lich-chieu/update', this.update_lich)
+                    .then(res => {
+                        if (res.data.status) {
+                            toastr.success('Cập nhật thành công!');
+                            this.loadLichChieu();
+                        } else {
+                            toastr.error('Lỗi không mong muốn')
+                        }
                     })
                     .catch((res) => {
                         $.each(res.response.data.errors, function(k, v) {
