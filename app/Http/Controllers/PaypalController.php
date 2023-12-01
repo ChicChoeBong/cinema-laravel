@@ -28,7 +28,7 @@ class PaypalController extends Controller
                 ]
             ]
         ]);
-        //dd($response);
+        dd($response);
         if(isset($response['id']) && $response['id']!=null) {
             foreach($response['links'] as $link) {
                 if($link['rel'] === 'approve') {
