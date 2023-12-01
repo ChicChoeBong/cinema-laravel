@@ -47,14 +47,14 @@
                                             <li class="quality">
                                                 <span>{{ $phim_1->the_loai }}</span>
                                                 <span>HD</span>
-                                            </li>
+                                            </li><br>
                                             <li class="category">
                                                 {{ $phim_1->dien_vien }}
-                                            </li>
+                                            </li><br>
                                             <li class="release-time">
                                                 <span><i class="far fa-calendar-alt"></i> {{ $phim_1->ngay_khoi_chieu }}</span>
                                                 <span><i class="far fa-clock"></i> {{ $phim_1->thoi_luong }} phút</span>
-                                            </li>
+                                            </li><br>
                                         </ul>
                                     </div>
                                     <a href="{{ $phim_1->trailer }}"
@@ -85,14 +85,14 @@
                                             <li class="quality">
                                                 <span>{{ $phim_2->the_loai }}</span>
                                                 <span>hd</span>
-                                            </li>
+                                            </li><br>
                                             <li class="category">
                                                 {{ $phim_2->dien_vien }}
-                                            </li>
+                                            </li><br>
                                             <li class="release-time">
                                                 <span><i class="far fa-calendar-alt"></i> {{ $phim_2->ngay_khoi_chieu }}</span>
                                                 <span><i class="far fa-clock"></i> {{ $phim_2->thoi_luong }} phút</span>
-                                            </li>
+                                            </li><br>
                                         </ul>
                                     </div>
 
@@ -117,21 +117,21 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="banner-content">
-                                    <h6 class="sub-title" data-animation="fadeInUp" data-delay=".2s">DZFULLSTACK</h6>
+                                    <h6 class="sub-title" data-animation="fadeInUp" data-delay=".2s">CHICBONG</h6>
                                     <h2 class="title" data-animation="fadeInUp" data-delay=".4s">{{ $phim_3->ten_phim }}</h2>
                                     <div class="banner-meta" data-animation="fadeInUp" data-delay=".6s">
                                         <ul>
                                             <li class="quality">
                                                 <span>{{ $phim_3->the_loai }}</span>
                                                 <span>hd</span>
-                                            </li>
+                                            </li><br>
                                             <li class="category">
                                                 {{ $phim_3->dien_vien }}
-                                            </li>
+                                            </li><br>
                                             <li class="release-time">
                                                 <span><i class="far fa-calendar-alt"></i> {{ $phim_3->ngay_khoi_chieu }}</span>
                                                 <span><i class="far fa-clock"></i> {{ $phim_3->thoi_luong }} phút</span>
-                                            </li>
+                                            </li><br>
                                         </ul>
                                     </div>
                                     <a href="{{ $phim_3->trailer }}"
