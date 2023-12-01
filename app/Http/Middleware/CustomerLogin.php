@@ -11,8 +11,8 @@ class CustomerLogin
     public function handle(Request $request, Closure $next)
     {
         $check = Auth::guard('customer')->check();
-        $check_soc = Auth::guard('user')->check();
-        if($check || $check_soc) {
+        $user_soc = Auth::user();
+        if($check || $user_soc !== null) {
             $user = Auth::guard('customer')->user();
             // $user_soc = Auth::guard('user')->user();
             if ($user !== null) {
