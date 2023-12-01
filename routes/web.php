@@ -30,13 +30,13 @@ Route::get('/logout', [CustomerController::class, 'actionLogout']);
 Route::get('/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
 
 
-Route::get('/chinh-sach-rieng-tu', function(){
+Route::get('/chinh-sach-rieng-tu', function () {
     return '<h1>Chính sách riêng tư</h1>';
 });
-Route::get('/auth/facebook', function(){
+Route::get('/auth/facebook', function () {
     return Socialite::driver('facebook')->redirect();
 });
-Route::get('/auth/facebook/callback', function(){
+Route::get('/auth/facebook/callback', function () {
     return 'Callback login facebook';
 });
 
@@ -70,7 +70,7 @@ Route::post('/tim-kiem', [HomepageController::class, 'actionTimKiem']);
 
 //Quốc
 //Đặt vé, thanh toán
-Route::group(['prefix' => '/client', 'middleware' => 'loginCustomer'],function() {
+Route::group(['prefix' => '/client', 'middleware' => 'loginCustomer'], function () {
     Route::get('/dat-ve/{id_lich_chieu}', [LichChieuController::class, 'viewKhachHangDatVe']);
     Route::get('/hien-thi-ghe-ban/{id_lich_chieu}', [LichChieuController::class, 'showDataByIdLich']);
     Route::post('/dat-ve/giu-cho', [GheBanController::class, 'giuChoDatVe']);
@@ -86,19 +86,19 @@ Route::get('/auto', [GiaoDichController::class, 'auto']);
 Route::get('/e48c2936-ec56-4452-8e01-9ce7f1b38952', [GheBanController::class, 'huyVeAuto']);
 
 //Admin
-Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
+Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'], function () {
     Route::get('/', [AdminController::class, 'viewHome']);
 
     //Quốc
     //Cấu hình homepage
-    Route::group(['prefix' => '/cau-hinh'], function() {
+    Route::group(['prefix' => '/cau-hinh'], function () {
         Route::get('/index', [ConfigController::class, 'index']);
         Route::post('/index', [ConfigController::class, 'store']);
     });
 
     //H.Phúc
     //Quản lý tài khoản khách hàng
-    Route::group(['prefix' => '/khach-hang'], function() {
+    Route::group(['prefix' => '/khach-hang'], function () {
         Route::get('/active/{hash}', [CustomerController::class, 'actionActive']);
         Route::get('/active/thong-bao', [CustomerController::class, 'thongBaoKichHoatTaiKhoan']);
         Route::get('/thong-tin', [CustomerController::class, 'viewThongTin']);
@@ -111,7 +111,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
 
     //Tín
     //Quản lý tài khoản admin
-    Route::group(['prefix' => '/tai-khoan'], function() {
+    Route::group(['prefix' => '/tai-khoan'], function () {
         Route::get('/index', [AdminController::class, 'index']);
         Route::get('/index/data', [AdminController::class, 'getData']);
         Route::post('/create', [AdminController::class, 'store']);
@@ -119,7 +119,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
 
     //Mạnh
     //Quản lý phòng
-    Route::group(['prefix' => '/phong'], function() {
+    Route::group(['prefix' => '/phong'], function () {
         Route::get('/index', [PhongController::class, 'index']);
         Route::get('/data', [PhongController::class, 'getData']);
         Route::post('/index', [PhongController::class, 'store']);
@@ -134,10 +134,10 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
 
     //H.Phúc
     //Quản lý phim
-    Route::group(['prefix' => '/phim'], function() {
+    Route::group(['prefix' => '/phim'], function () {
         Route::get('/index', [PhimController::class, 'index']);
         Route::post('/create', [PhimController::class, 'store']);
-        Route::get('/data' , [PhimController::class, 'getData']);
+        Route::get('/data', [PhimController::class, 'getData']);
 
         Route::get('/index-vue', [PhimController::class, 'indexVue']);
         Route::post('/index-vue', [PhimController::class, 'storeVue']);
@@ -148,7 +148,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
 
     //Lực
     //Quản lý lịch chiếu
-    Route::group(['prefix' => '/lich-chieu'], function() {
+    Route::group(['prefix' => '/lich-chieu'], function () {
         Route::get('/index', [LichChieuController::class, 'index'])->name('tao_nhieu_buoi');
         Route::post('/index', [LichChieuController::class, 'store']);
 
@@ -159,6 +159,7 @@ Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'],function() {
 
         Route::get('/tao-mot-buoi', [LichChieuController::class, 'viewTaoMotBuoi'])->name('tao_mot_buoi');
         Route::post('/tao-mot-buoi', [LichChieuController::class, 'actionTaoMotBuoi']);
+        Route::post('/update', [LichChieuController::class, 'update']);
 
         Route::post('/xoa-lich', [LichChieuController::class, 'destroy']);
 
