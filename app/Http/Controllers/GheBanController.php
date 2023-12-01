@@ -51,12 +51,12 @@ class GheBanController extends Controller
                         ->first();
         if ($gheBan) {
             $gheBan->trang_thai = 2;
-            $gheBan->id_khach_hang = Auth::guard('customer')->user()->id;
+            $gheBan->id_khach_hang = Auth::guard('customer')->user()->id ?? Auth::user()->id;
             $gheBan->save();
 
             GheBan::where('trang_thai', 2)
                   ->where('id_lich', '<>', $gheBan->id_lich)
-                  ->where('id_khach_hang', Auth::guard('customer')->user()->id)
+                  ->where('id_khach_hang', Auth::guard('customer')->user()->id ?? Auth::user()->id)
                   ->update(['trang_thai' => 0, 'id_khach_hang' => null]);
 
             return response()->json([
@@ -96,9 +96,10 @@ class GheBanController extends Controller
         // 2.1. Nếu như nó không có đặt ghế nào => chửi cái
         // 2.2. Nếu có thì mình tạo ra cái mã giao dịch => hiển thị ra view
         $user = Auth::guard('customer')->user();
-        $dsGheBan = GheBan::where('id_khach_hang', $user->id)->where('trang_thai', 2)->get();
+        $user_soc = Auth::user();
+        $dsGheBan = GheBan::where('id_khach_hang', $user->id ?? $user_soc->id)->where('trang_thai', 2)->get();
         if(count($dsGheBan) == 0) {
-            toastr()->error('Bạn chưa có đặt chổ nên không thể thanh toán');
+            toastr()->error('Bạn chưa có đặt chỗ nên không thể thanh toán');
             return redirect('/');
         }
         $phim = Phim::join('lich_chieus', 'phims.id', 'lich_chieus.id_phim')
@@ -122,9 +123,10 @@ class GheBanController extends Controller
     public function done()
     {
         $user = Auth::guard('customer')->user();
-        $dsGheBan = GheBan::where('id_khach_hang', $user->id)->where('trang_thai', 2)->get();
+        $user_soc = Auth::user();
+        $dsGheBan = GheBan::where('id_khach_hang', $user->id ?? $user_soc->id)->where('trang_thai', 2)->get();
         if(count($dsGheBan) == 0) {
-            toastr()->error('Bạn chưa có đặt chổ nên không thể thanh toán');
+            toastr()->error('Bạn chưa có đặt chỗ nên không thể thanh toán');
             return redirect('/');
         }
         $phim = Phim::join('lich_chieus', 'phims.id', 'lich_chieus.id_phim')
