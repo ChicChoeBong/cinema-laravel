@@ -34,7 +34,9 @@
                                 <div class="card-header">
                                     <form action="{{ route('paypal') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="price" value={{ number_format($tongVe * 45000, 0, '.', ',') }}>
+                                        <input type="hidden" name="price" value={{ $tongVe * 45000 }}>
+                                        <input type="hidden" name="product_name" value={{ $phim->ten_phim }}>
+                                        <input type="hidden" name="quantity" value={{ $tongVe }}>
                                         <button class="btn-block text-left collapsed" type="button" data-toggle="collapse"
                                             data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             <span class="season">Tổng Tiền Thanh Toán</span>
@@ -55,8 +57,7 @@
                                         </button>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                {{-- <div id="paypal-button-container"></div> --}}
-                                                <button type="submit" >Thanh toán paypal</button>
+                                                <input type="image" style="background-color: white" src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-color.svg" alt="Submit" height="30rem">
                                             </div>
                                             <div class="col-md-6 text-left">
                                                 <span class="video-count">
@@ -106,16 +107,10 @@
     </script>
     <script>
         PayPal.Donation.Button({
-            env: 'sandbox',
-            hosted_button_id: 'FSD6HQPBKTRZE',
-            // business: 'YOUR_EMAIL_OR_PAYERID',
             image: {
                 src: 'https://th.bing.com/th/id/R.177f3b7255d22008d0ad3a35704c662a?rik=uxJt6INpWcVXXw&riu=http%3a%2f%2f2.bp.blogspot.com%2f-gzW3J2sXFm0%2fU5h4jgo_1UI%2fAAAAAAAACqo%2fE5KtY-0gZfw%2fs1600%2fLogo%2bPaypal.png&ehk=hMnHFaduw2ySO0BMkGc3oikIhTyV2gKP%2fC3ene6UeMo%3d&risl=&pid=ImgRaw&r=0',
                 title: 'PayPal - The safer, easier way to pay online!',
                 alt: 'Pay with PayPal button'
-            },
-            onComplete: function(params) {
-                toastr.success("Đã thanh toán thành công!");
             },
         }).render('#paypal-button-container');
 

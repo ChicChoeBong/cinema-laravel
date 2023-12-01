@@ -66,9 +66,9 @@
                     .post('/client/dat-ve/giu-cho', v)
                     .then((res) => {
                         if(res.data.status) {
-                            toastr.success('Đã giữ chổ thành công!');
+                            toastr.success('Đã giữ chỗ thành công!');
                         } else {
-                            toastr.error('Không thể giữ chổ!');
+                            toastr.error('Không thể giữ chỗ!');
                         }
                         this.loadData();
                     })
@@ -84,9 +84,9 @@
                     .post('/client/dat-ve/huy-cho', v)
                     .then((res) => {
                         if(res.data.status) {
-                            toastr.success('Đã hủy chổ thành công!');
+                            toastr.success('Đã hủy chỗ thành công!');
                         } else {
-                            toastr.error('Không thể hủy chổ!');
+                            toastr.error('Không thể hủy chỗ!');
                         }
                         this.loadData();
                     })
@@ -96,9 +96,9 @@
                         });
                     });
             },
-            // Đặt vé thì chúng ta có trạng thái từ 0 => 2 (vì chưa có ai đặt -> giữ chổ)
-            // Đặt vé thì chúng ta có trạng thái từ 2 => 0 (giữ chổ -> không đặt nữa)
-            // Nếu là giữ chổ: trang_thai = 2 và id_khach_hang
+            // Đặt vé thì chúng ta có trạng thái từ 0 => 2 (vì chưa có ai đặt -> giữ chỗ)
+            // Đặt vé thì chúng ta có trạng thái từ 2 => 0 (giữ chỗ -> không đặt nữa)
+            // Nếu là giữ chỗ: trang_thai = 2 và id_khach_hang
             // Nếu là ko đặt vé: trang_thai = 0 và id_khach_hang = null
         },
     });

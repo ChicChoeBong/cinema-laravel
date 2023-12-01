@@ -23,12 +23,11 @@ class PaypalController extends Controller
                 [
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => $request->price/23000
+                        "value" => number_format($request->price/23000, 2)
                     ]
                 ]
             ]
         ]);
-        dd($response);
         if(isset($response['id']) && $response['id']!=null) {
             foreach($response['links'] as $link) {
                 if($link['rel'] === 'approve') {
@@ -63,7 +62,8 @@ class PaypalController extends Controller
             $payment->payment_method = "PayPal";
             $payment->save();
 
-            return('toastr.success("Đã thanh toán thành công!")');
+            toastr()->success("Đã thanh toán thành công!");
+            return redirect()->route('done');
             unset($_SESSION['product_name']);
             unset($_SESSION['quantity']);
 
@@ -73,6 +73,7 @@ class PaypalController extends Controller
     }
     public function cancel()
     {
-        return('toastr.error("Đã hết thời gian thanh toán")');
+        toastr()->error("Thanh toán thất bại!");
+        return redirect('/');
     }
 }

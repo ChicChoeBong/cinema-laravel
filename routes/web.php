@@ -87,7 +87,7 @@ Route::group(['prefix' => '/client', 'middleware' => 'loginCustomer'],function()
     Route::post('/dat-ve/giu-cho', [GheBanController::class, 'giuChoDatVe']);
     Route::post('/dat-ve/huy-cho', [GheBanController::class, 'huyChoDatVe']);
     Route::get('/thanh-toan', [GheBanController::class, 'thanhToan']);
-    Route::get('/done', [GheBanController::class, 'done']);
+    Route::get('/done', [GheBanController::class, 'done'])->name('done');
 });
 
 Route::post('paypal', [PaypalController::class, 'paypal'])->name('paypal');
