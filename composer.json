@@ -12,7 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.10",
         "laravel/tinker": "^2.7",
-        "srmklive/paypal": "~3.0",
+        "mongodb/mongodb": "*",
         "unisharp/laravel-filemanager": "^2.5",
         "yoeunes/toastr": "^2.0"
     },
