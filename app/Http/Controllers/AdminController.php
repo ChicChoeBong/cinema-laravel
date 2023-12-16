@@ -49,6 +49,27 @@ class AdminController extends Controller
         ]);
     }
 
+    public function update(Request $request){
+        $data = $request->all();
+        $phim = Admin::where('id', $request->id)->first();
+        $phim->update($data);
+
+        return response()->json([
+            'status'    => true,
+        ]);
+    }
+
+    public function changeStatus($id)
+    {
+        $change = Admin::find($id);
+        if($change->is_block == 1) {
+            $change->is_block = 0;
+        } else  {
+            $change->is_block = 1;
+        }
+        $change->save();
+    }
+
     public function store(CreateTaiKhoanRequest $request)
     {
         $data = $request->all();

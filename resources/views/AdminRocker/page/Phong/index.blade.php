@@ -2,9 +2,9 @@
 @section('noi_dung')
     <div class="row" id="app">
         <div class="col-md-5">
-            <div class="card">
-                <div class="card-header">
-                    Thêm Mới Phòng
+            <div class="card border-info border-bottom border-3 border-0">
+                <div class="card-header bg-primary">
+                    <strong class="card-title" style=" color: white; font-size: 20px">Thêm Mới Phòng</strong>
                 </div>
                 <div class="card-body">
                     <div class="form-group mt-2">
@@ -20,11 +20,11 @@
                     </div>
                     <div class="form-group mt-3">
                         <label>Số Ghế Hàng Dọc</label>
-                        <input v-model="them_moi.hang_doc"  type="number" class="form-control" >
+                        <input v-model="them_moi.hang_doc"  type="number" class="form-control" placeholder="Nhập số ghế hàng dọc">
                     </div>
                     <div class="form-group mt-3">
                         <label>Số Ghế Hàng Ngang</label>
-                        <input  v-model="them_moi.hang_ngang" type="number" class="form-control" >
+                        <input  v-model="them_moi.hang_ngang" type="number" class="form-control" placeholder="Nhập số ghế hàng ngang">
                     </div>
                 </div>
                 <div class="card-footer text-end">
@@ -33,13 +33,13 @@
             </div>
         </div>
         <div class="col-md-7">
-            <div class="card">
-                <div class="card-header">
-                    Danh Sách Các Phòng
+            <div class="card border-info border-bottom border-3 border-0">
+                <div class="card-header bg-primary">
+                    <strong class="card-title" style=" color: white; font-size: 20px">Danh Sách Các Phòng</strong>
                 </div>
                 <div class="card-body table-responsive">
                     <table id="table" class="table table-bordered">
-                        <thead class="bg-primary">
+                        <thead class="bg-info">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Tên phòng</th>
@@ -83,7 +83,7 @@
                                             placeholder="Nhập vào id cần xóa">
                                     </div>
                                     <div class="modal-footer" >
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                         <button v-on:click="xoaPhong()" type="button" class="btn btn-primary"
                                             data-bs-dismiss="modal">Chấp Nhận Xóa</button>
                                     </div>
@@ -110,7 +110,7 @@
                                         <div class="form-group mt-3">
                                             <label>Tình Trạng</label>
                                             <select  v-model="phong_update.tinh_trang"  class="form-control">
-                                                <option v-bind:value="1">Còn Kinh Doanh</option>
+                                                <option v-bind:value="1" selected>Còn Kinh Doanh</option>
                                                 <option v-bind:value="0">Dừng Kinh Doanh</option>
                                             </select>
                                         </div>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
+                                            data-bs-dismiss="modal">Đóng</button>
                                         <button v-on:click="capNhatPhong()" type="button" class="btn btn-primary"
                                             data-bs-dismiss="modal">Cập Nhật</button>
                                     </div>
@@ -154,7 +154,7 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                 </div>
                             </div>
                         </div>

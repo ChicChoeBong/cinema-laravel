@@ -2,9 +2,9 @@
 @section('noi_dung')
     <div id="app" class="row">
         <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    Thêm Mới Phim
+            <div class="card border-info border-bottom border-3 border-0">
+                <div class="card-header bg-primary">
+                <strong class="card-title" style=" color: white; font-size: 20px"> Thêm Mới Phim </strong>
                 </div>
                 <div class="card-body">
                     <form id="createPhimForm">
@@ -43,7 +43,7 @@
                         <div class="form-group mt-3">
                             <label>Avatar</label>
                             <div class="input-group">
-                                <input id="hinh_anh" class="form-control" type="text" name="filepath">
+                                <input id="hinh_anh" class="form-control" type="text" name="filepath" placeholder="Chọn hình ảnh phim">
                                 <span class="input-group-prepend">
                                     <a id="lfm" data-input="hinh_anh" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Choose
@@ -59,7 +59,7 @@
                         <div class="form-group mt-3">
                             <label>Tình Trạng</label>
                             <select v-model="them_moi.tinh_trang" class="form-control">
-                                <option value="1">Đang Chiếu</option>
+                                <option value="1" selected>Đang Chiếu</option>
                                 <option value="2">Sắp Chiếu</option>
                                 <option value="0">Ngưng Chiếu</option>
                             </select>
@@ -72,14 +72,14 @@
             </div>
         </div>
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    Danh Sách Phim
+            <div class="card border-info border-bottom border-3 border-0">
+                <div class="card-header bg-primary">
+                    <strong class="card-title" style=" color: white; font-size: 20px">Danh Sách Phim</strong>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="table_phim">
-                            <thead class="bg-primary">
+                        <table class="table table-bordered " id="table_phim">
+                            <thead class="bg-info">
                                 <tr class="text-nowrap">
                                     <th>#</th>
                                     <th>Tên Phim</th>
@@ -138,13 +138,12 @@
                                         Bạn chắc chắn muốn xóa phim này!
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                       <button v-on:click="xoaPhimTrenServer()" type="button" class="btn btn-danger" data-bs-dismiss="modal">Xóa Phim</button>
                                     </div>
                                   </div>
                                 </div>
                             </div>
-
                             <div class="modal fade" id="hinhAnhModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                   <div class="modal-content">
@@ -160,7 +159,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                     </div>
                                   </div>
                                 </div>
@@ -202,7 +201,7 @@
                                         </div>
                                         <div class="form-group mt-3">
                                             <label>Mô Tả</label>
-                                            <textarea name="update_mo_ta" id="update_mo_ta" class="form-control" cols="30" rows="10"></textarea>
+                                            <textarea name="update_mo_ta" id="update_mo_ta" class="form-control" placeholder="Nhập vào mô tả phim" cols="30" rows="10"></textarea>
                                         </div>
                                         <div class="form-group mt-3">
                                             <label>Thể Loại</label>
@@ -211,7 +210,7 @@
                                         <div class="form-group mt-3">
                                             <label>Avatar</label>
                                             <div class="input-group">
-                                                <input id="hinh_anh_update" class="form-control" type="text" name="filepath">
+                                                <input id="hinh_anh_update" class="form-control" type="text" placeholder="Chọn hình ảnh phim" name="filepath">
                                                 <span class="input-group-prepend">
                                                     <a id="lfm_update" data-input="hinh_anh_update" data-preview="holder_update" class="btn btn-primary">
                                                         <i class="fa fa-picture-o"></i> Choose
@@ -236,7 +235,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                       <button v-on:click="capNhatPhimServer()" type="button" class="btn btn-primary" data-bs-dismiss="modal">Cập Nhật Phim</button>
                                     </div>
                                   </div>
@@ -272,6 +271,7 @@
                 $("#holder_update").html(text);
             },
             createPhim() {
+
                 this.them_moi.slug_ten_phim = this.slug;
                 this.them_moi.mo_ta = CKEDITOR.instances['mo_ta'].getData();
                 this.them_moi.avatar = $("#hinh_anh").val();
