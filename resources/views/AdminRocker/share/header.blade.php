@@ -2,10 +2,10 @@
     <nav class="navbar navbar-expand">
         <div class="topbar-logo-header">
             <div class="">
-                <img src="/assets_admin_rocker/images/logo-icon.png" class="logo-icon" alt="logo icon">
-            </div>
+                <img src="/assets_client/img/logo/logo.png" class="logo-icon" alt="logo icon">
+            {{-- </div>
             <div class="">
-                <h4 class="logo-text">CHICBONG</h4>
+                <h4 class="logo-text">CHICBONG</h4> --}}
             </div>
         </div>
         <div class="mobile-toggle-menu"><i class='bx bx-menu'></i></div>
@@ -29,7 +29,7 @@
                 $admin = Auth::guard('admin')->user();
             @endphp
             <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="/assets_admin_rocker/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
+                {{-- <img src="/assets_admin_rocker/images/avatars/avatar-2.png" class="user-img" alt="user avatar"> --}}
                 <div class="user-info ps-3">
                     <p class="user-name mb-0">{{ $admin->ho_va_ten }}</p>
                     <p class="designattion mb-0">{{ $admin->email }}</p>
