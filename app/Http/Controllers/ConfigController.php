@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Config;
 use App\Models\Phim;
 use Illuminate\Http\Request;
+use MongoDB\BSON\ObjectID;
 
 class ConfigController extends Controller
 {
     public function index()
     {
-        $config         = Config::orderByDESC('_id')->first();
+        $config         = Config::all()->first();
         $danhSachPhim   = Phim::where('tinh_trang', '>', 0)->get();
         return view('AdminRocker.page.CauHinh.index', compact('config', 'danhSachPhim'));
     }
@@ -19,7 +20,8 @@ class ConfigController extends Controller
     {
         $data = $request->all();
 
-        Config::create($data);
+        $config = Config::where('_id', new ObjectID($request->_id))->first();
+        $config->update($data);
 
         return redirect()->back();
     }

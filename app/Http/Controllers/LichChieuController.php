@@ -83,6 +83,7 @@ class LichChieuController extends Controller
                     '$project' => [
                         'ten_phim' => '$phim.ten_phim',
                         'ten_phong' => '$phong.ten_phong',
+                        'id_phong' => '$phong._id',
                         'thoi_gian_chieu_chinh' => '$thoi_gian_chieu_chinh',
                         'thoi_gian_quang_cao' => '$thoi_gian_quang_cao',
                         'thoi_gian_bat_dau' => '$thoi_gian_bat_dau',
@@ -190,15 +191,18 @@ class LichChieuController extends Controller
         ]);
 
         // Lấy tất các các ghế của phòng
-        $tat_ca_ghe = Phong::where('phongs._id', $request->id_phong)
-            ->join('ghes', 'ghes.id_phong', 'phongs._id')
-            ->get();
 
-        foreach ($tat_ca_ghe as $key => $value) {
-            GheBan::create([
-                'id_lich'   => $lich_chieu->_id,
-                'ten_ghe'   => $value->ten_ghe,
-            ]);
+        $phong = DB::collection('phongs')->where('_id', $request->id_phong)->first();
+
+        if ($phong) {
+            $tatCaGhe = DB::collection('ghes')->where('id_phong', $phong['_id'])->get();
+
+            foreach ($tatCaGhe as $value) {
+                GheBan::create([
+                    'id_lich' => new ObjectID($request->_id),
+                    'ten_ghe' => $value['ten_ghe'],
+                ]);
+            }
         }
 
         return response()->json([
@@ -249,6 +253,19 @@ class LichChieuController extends Controller
                     'thoi_gian_bat_dau'         => $thoi_gian_bat_dau,
                     'thoi_gian_ket_thuc'        => $thoi_gian_ket_thuc,
                 ]);
+
+                $phong = DB::collection('phongs')->where('_id', $request->id_phong)->first();
+
+                if ($phong) {
+                    $tatCaGhe = DB::collection('ghes')->where('id_phong', $phong['_id'])->get();
+
+                    foreach ($tatCaGhe as $value) {
+                        GheBan::create([
+                            'id_lich' => new ObjectID($request->_id),
+                            'ten_ghe' => $value['ten_ghe'],
+                        ]);
+                    }
+                }
             }
             $ngay_bat_dau->addDay();
         }
@@ -261,15 +278,41 @@ class LichChieuController extends Controller
 
     public function dataThoiKhoaBieu()
     {
-        $data = LichChieu::join('phims', 'lich_chieus.id_phim', 'phims._id')
-            ->join('phongs', 'lich_chieus.id_phong', 'phongs._id')
-            ->select(
-                'phims.ten_phim',
-                'phongs.ten_phong',
-                'lich_chieus.thoi_gian_bat_dau as start',
-                'lich_chieus.thoi_gian_ket_thuc as end'
-            )
-            ->get();
+        $data = LichChieu::raw(function ($collection) {
+            return $collection->aggregate([
+                [
+                    '$lookup' => [
+                        'from' => 'phims',
+                        'localField' => 'id_phim',
+                        'foreignField' => '_id',
+                        'as' => 'phim',
+                    ],
+                ],
+                [
+                    '$unwind' => '$phim',
+                ],
+                [
+                    '$lookup' => [
+                        'from' => 'phongs',
+                        'localField' => 'id_phong',
+                        'foreignField' => '_id',
+                        'as' => 'phong',
+                    ],
+                ],
+                [
+                    '$unwind' => '$phong',
+                ],
+                [
+                    '$project' => [
+                        'ten_phim' => '$phim.ten_phim',
+                        'ten_phong' => '$phong.ten_phong',
+                        'start' => '$thoi_gian_bat_dau',
+                        'end' => '$thoi_gian_ket_thuc',
+                        // Add other fields as needed
+                    ],
+                ],
+            ]);
+        });
         foreach ($data as $key => $value) {
             $value->title = 'Tên phim: ' . $value->ten_phim . " - Phòng: " . $value->ten_phong;
         }

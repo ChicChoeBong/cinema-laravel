@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use MongoDB\BSON\ObjectID;
 
 class GheBanController extends Controller
 {
@@ -30,127 +31,17 @@ class GheBanController extends Controller
 
     public function doiTrangThaiGheBan(Request $request)
     {
-        $ghe_ban = GheBan::where('id', $request->id)->first();
+        $ghe_ban = GheBan::where('_id', new ObjectID($request->_id))->first();
         $ghe_ban->co_the_ban = !$ghe_ban->co_the_ban;
         $ghe_ban->save();
     }
 
     public function getData($id_lich)
     {
-        $data = GheBan::where('id_lich', $id_lich)->get();
+        $data = GheBan::where('id_lich', new ObjectID($id_lich))->get();
 
         return response()->json([
             'data'  => $data,
         ]);
-    }
-
-    public function giuChoDatVe(Request $request)
-    {
-        $gheBan = GheBan::where('id', $request->id)
-                        ->where('trang_thai', '<>', 1)
-                        ->first();
-        if ($gheBan) {
-            $gheBan->trang_thai = 2;
-            $gheBan->id_khach_hang = Auth::guard('customer')->user()->id ?? Auth::user()->id;
-            $gheBan->save();
-
-            GheBan::where('trang_thai', 2)
-                  ->where('id_lich', '<>', $gheBan->id_lich)
-                  ->where('id_khach_hang', Auth::guard('customer')->user()->id ?? Auth::user()->id)
-                  ->update(['trang_thai' => 0, 'id_khach_hang' => null]);
-
-            return response()->json([
-                'status'    => 1,
-            ]);
-        } else {
-            return response()->json([
-                'status'    => 0,
-            ]);
-        }
-    }
-
-    public function huyChoDatVe(Request $request)
-    {
-        $gheBan = GheBan::where('id', $request->id)
-                        ->where('trang_thai', '<>', 1)
-                        ->first();
-        if ($gheBan) {
-            $gheBan->trang_thai = 0;
-            $gheBan->id_khach_hang = null;
-            $gheBan->save();
-
-            return response()->json([
-                'status'    => 1,
-            ]);
-        } else {
-            return response()->json([
-                'status'    => 0,
-            ]);
-        }
-    }
-
-    public function thanhToan()
-    {
-        // 1. Lấy thông tin khách hàng đang đăng nhập
-        // 2, Lấy danh sách ghế mà nó đã đặt
-        // 2.1. Nếu như nó không có đặt ghế nào => chửi cái
-        // 2.2. Nếu có thì mình tạo ra cái mã giao dịch => hiển thị ra view
-        $user = Auth::guard('customer')->user();
-        $user_soc = Auth::user();
-        $dsGheBan = GheBan::where('id_khach_hang', $user->id ?? $user_soc->id)->where('trang_thai', 2)->get();
-        if(count($dsGheBan) == 0) {
-            toastr()->error('Bạn chưa có đặt chỗ nên không thể thanh toán');
-            return redirect('/');
-        }
-        $phim = Phim::join('lich_chieus', 'phims.id', 'lich_chieus.id_phim')
-                    ->join('ghe_bans', 'lich_chieus.id', 'ghe_bans.id_lich')
-                    ->where('lich_chieus.id', $dsGheBan[0]->id_lich)
-                    ->select('phims.*', 'lich_chieus.thoi_gian_bat_dau')
-                    ->first();
-        $maGiaoDich = 'HD' . (78345 + $dsGheBan[0]->id);
-        $tongVe = 0;
-
-        foreach($dsGheBan as $key => $value) {
-            $value->ma_giao_dich = $maGiaoDich;
-            $value->save();
-
-            $tongVe = $tongVe + 1;
-        }
-
-        return view('client.thanh_toan', compact('phim', 'dsGheBan', 'maGiaoDich', 'tongVe'));
-    }
-
-    public function done()
-    {
-        $user = Auth::guard('customer')->user();
-        $user_soc = Auth::user();
-        $dsGheBan = GheBan::where('id_khach_hang', $user->id ?? $user_soc->id)->where('trang_thai', 2)->get();
-        if(count($dsGheBan) == 0) {
-            toastr()->error('Bạn chưa có đặt chỗ nên không thể thanh toán');
-            return redirect('/');
-        }
-        $phim = Phim::join('lich_chieus', 'phims.id', 'lich_chieus.id_phim')
-                    ->join('ghe_bans', 'lich_chieus.id', 'ghe_bans.id_lich')
-                    ->where('lich_chieus.id', $dsGheBan[0]->id_lich)
-                    ->select('phims.*', 'lich_chieus.thoi_gian_bat_dau')
-                    ->first();
-
-        $dataMail['phim'] = $phim->ten_phim;
-        $dataMail['thoi_gian'] = $phim->ngay_khoi_chieu;
-        $dataMail['ho_va_ten'] = $user->ho_va_ten ?? $user_soc->name;
-        $dataMail['email'] = $user->email ?? $user_soc->email ?? '';
-
-        if ($dataMail['email'] == '') {
-            return redirect('/')->toastr()->success("Cảm ơn quý khách đã sử dụng dịch vụ!");
-        }
-        $dataMail['ghe'] = '';
-        foreach($dsGheBan as $key => $value) {
-            $value->trang_thai = 1;
-            $dataMail['ghe'] .= $value->ten_ghe . ',';
-            $value->save();
-        }
-        SendEmailSuccess::dispatch($dataMail);
-
-        return redirect('/');
     }
 }

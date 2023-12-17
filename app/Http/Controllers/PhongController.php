@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ghe;
 use App\Models\Phong;
 use Illuminate\Http\Request;
+use MongoDB\BSON\ObjectID;
 
 class PhongController extends Controller
 {
@@ -30,7 +31,7 @@ class PhongController extends Controller
                 Ghe::create([
                     'ten_ghe'       => $ten_ghe,
                     'tinh_trang'    => 1,
-                    'id_phong'      => $newPhong->_id,
+                    'id_phong'      => new ObjectID($newPhong->_id),
                 ]);
             }
         }
@@ -62,7 +63,7 @@ class PhongController extends Controller
                     Ghe::create([
                         'ten_ghe'       => $ten_ghe,
                         'tinh_trang'    => 1,
-                        'id_phong'      => $request->_id,
+                        'id_phong'      => new ObjectID($request->_id),
                     ]);
                 }
             }
@@ -113,7 +114,7 @@ class PhongController extends Controller
     public function getDataGhe($id_phong)
     {
         $phong = Phong::where('_id', $id_phong)->first();
-        $data  = Ghe::where('id_phong', $id_phong)->get();
+        $data  = Ghe::where('id_phong', new ObjectID($id_phong))->get();
 
         return response()->json([
             'danh_sach_ghe'     => $data,

@@ -62,27 +62,27 @@
                             <div class="form-check form-check-inline">
                                 <input v-model="create_lich.thu_3" class="form-check-input" type="checkbox"
                                     id="inlineCheckbox3" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox2">Thứ 4</label>
+                                <label class="form-check-label" for="inlineCheckbox3">Thứ 4</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input v-model="create_lich.thu_4" class="form-check-input" type="checkbox"
                                     id="inlineCheckbox4" value="option4">
-                                <label class="form-check-label" for="inlineCheckbox2">Thứ 5</label>
+                                <label class="form-check-label" for="inlineCheckbox4">Thứ 5</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input v-model="create_lich.thu_5" class="form-check-input" type="checkbox"
                                     id="inlineCheckbox5" value="option5">
-                                <label class="form-check-label" for="inlineCheckbox2">Thứ 6</label>
+                                <label class="form-check-label" for="inlineCheckbox5">Thứ 6</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input v-model="create_lich.thu_6" class="form-check-input" type="checkbox"
                                     id="inlineCheckbox6" value="option6">
-                                <label class="form-check-label" for="inlineCheckbox2">Thứ 7</label>
+                                <label class="form-check-label" for="inlineCheckbox6">Thứ 7</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input v-model="create_lich.thu_0" class="form-check-input" type="checkbox"
                                     id="inlineCheckbox7" value="option7">
-                                <label class="form-check-label" for="inlineCheckbox2">Chủ Nhật</label>
+                                <label class="form-check-label" for="inlineCheckbox7">Chủ Nhật</label>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -118,18 +118,22 @@
             methods: {
                 createLichChieu() {
                     axios
+                        toastr.success('Vui lòng chờ!');
                         .post('/admin/lich-chieu/index', this.create_lich)
                         .then((res) => {
                             this.loadDataPhim();
                             this.loadDataPhong();
                             toastr.success('Đã thêm mới lịch chiếu thành công!');
+
+                            setTimeout(() => {
+                                window.location.href = '/admin/lich-chieu/tao-mot-buoi';
+                            });
                         })
                         .catch((res) => {
                             $.each(res.response.data.errors, function(k, v) {
                                 toastr.error(v[0]);
                             });
                         });
-
                 },
                 loadDataPhim() {
                     axios

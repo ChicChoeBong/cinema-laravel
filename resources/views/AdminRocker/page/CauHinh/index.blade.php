@@ -12,8 +12,9 @@
                         <div class="form-group mt-3">
                             <label>Ảnh Nền Trang Chủ</label>
                             <div class="input-group">
-                                <input value="{{ isset($config->bg_homepage) }}" id="hinh_anh" class="form-control"
-                                    type="text" name="bg_homepage">
+                                <input type="hidden" name="_id" value="{{ $config->_id }}">
+                                <input value="{{ $config->bg_homepage }}" id="hinh_anh" class="form-control" type="text"
+                                    name="bg_homepage">
                                 <span class="input-group-prepend">
                                     <a id="lfm" data-input="hinh_anh" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Choose

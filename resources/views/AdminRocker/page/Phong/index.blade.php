@@ -192,6 +192,7 @@
             },
             methods: {
                 createPhong() {
+                    toastr.success('Vui lòng đợi!');
                     axios
                         .post('/admin/phong/index', this.them_moi)
                         .then((res) => {

@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PhimSeeder::class);
         $this->call(ConfigSeeder::class);
         $this->call(PhongSeeder::class);
+        $this->call(GheSeeder::class);
         $this->call(LichChieuSeeder::class);
+        $this->call(GheBanSeeder::class);
         // Schema::enableForeignKeyConstraints();
     }
 }

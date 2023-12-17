@@ -11,6 +11,10 @@ class GheBan extends Model
 
     protected $table = 'ghe_bans';
 
+    protected $attributes = [
+        'co_the_ban' => 1,
+    ];
+
     protected $fillable = [
         'ten_ghe',
         'id_lich',
