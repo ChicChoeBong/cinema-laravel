@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class LichChieuSeeder extends Seeder
 {
@@ -31,8 +32,8 @@ class LichChieuSeeder extends Seeder
                     'id_phim' => $phimId,
                     'thoi_gian_chieu_chinh' => $thoi_gian_chieu_chinh,
                     'thoi_gian_quang_cao' => $thoi_gian_quang_cao,
-                    'thoi_gian_bat_dau' => $thoi_gian_bat_dau,
-                    'thoi_gian_ket_thuc' => $thoi_gian_ket_thuc,
+                    'thoi_gian_bat_dau' => $thoi_gian_bat_dau->toDateTimeString(),
+                    'thoi_gian_ket_thuc' => $thoi_gian_ket_thuc->toDateTimeString(),
                 ];
             }
         }

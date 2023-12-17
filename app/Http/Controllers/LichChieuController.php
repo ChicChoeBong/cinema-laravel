@@ -54,11 +54,49 @@ class LichChieuController extends Controller
 
     public function getData()
     {
-        $data = LichChieu::join('phims', 'lich_chieus.id_phim', 'phims._id')
-            ->join('phongs', 'lich_chieus.id_phong', 'phongs._id')
-            ->select('phims.ten_phim', 'phongs.ten_phong', 'lich_chieus.*')
-            ->orderBy('lich_chieus.thoi_gian_bat_dau')
-            ->get();
+        $data = LichChieu::raw(function ($collection) {
+            return $collection->aggregate([
+                [
+                    '$lookup' => [
+                        'from' => 'phims',
+                        'localField' => 'id_phim',
+                        'foreignField' => '_id',
+                        'as' => 'phim',
+                    ],
+                ],
+                [
+                    '$unwind' => '$phim',
+                ],
+                [
+                    '$lookup' => [
+                        'from' => 'phongs',
+                        'localField' => 'id_phong',
+                        'foreignField' => '_id',
+                        'as' => 'phong',
+                    ],
+                ],
+                [
+                    '$unwind' => '$phong',
+                ],
+                [
+                    '$project' => [
+                        'ten_phim' => '$phim.ten_phim',
+                        'ten_phong' => '$phong.ten_phong',
+                        'thoi_gian_chieu_chinh' => '$thoi_gian_chieu_chinh',
+                        'thoi_gian_quang_cao' => '$thoi_gian_quang_cao',
+                        'thoi_gian_bat_dau' => '$thoi_gian_bat_dau',
+                        'thoi_gian_ket_thuc' => '$thoi_gian_ket_thuc',
+                        // Add other fields as needed
+                    ],
+                ],
+                [
+                    '$sort' => [
+                        'thoi_gian_bat_dau' => 1,
+                    ],
+                ],
+            ]);
+        });
+
         return response()->json([
             'data'  => $data,
         ]);
