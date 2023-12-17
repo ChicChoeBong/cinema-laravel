@@ -156,7 +156,6 @@
                     .get('/admin/khach-hang/data')
                     .then((res) => {
                         this.list = res.data.data;
-                        this.loadData();
                     });
             },
             updateKhachHang() {
