@@ -144,7 +144,7 @@ class CustomerController extends Controller
     {
         $data = $request->all();
         $hash = Str::uuid(); // tạo ra 1 biến tên hash kiểu string có 36 ký tự không trùng với nhau
-        $data['hash_mail'] = $hash;
+        $data['hash_mail'] = $hash->toString();
         $data['password']  = bcrypt($data['password']);
         Customer::create($data);
 
