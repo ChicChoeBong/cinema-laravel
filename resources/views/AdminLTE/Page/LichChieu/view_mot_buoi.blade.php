@@ -2,9 +2,9 @@
 @section('noi_dung')
 <div class="row" id="app">
     <div class="col-md-12">
-        <div class="card border-danger border-bottom border-3 border-0">
-            <div class="card-header">
-                Tạo Buổi Chiếu Phim
+        <div class="card border-info border-bottom border-3 border-0">
+            <div class="card-header bg-primary">
+                <strong class="card-title" style=" color: white; font-size: 20px">Tạo Buổi Chiếu Phim</strong>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -54,13 +54,13 @@
         </div>
     </div>
     <div class="col-md-12 mt-5">
-        <div class="card">
-            <div class="card-header">
-                Danh Sách Các Buổi Chiếu
+        <div class="card border-info border-bottom border-3 border-0">
+            <div class="card-header bg-primary">
+                <strong class="card-title" style=" color: white; font-size: 20px">Danh Sách Các Buổi Chiếu</strong>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">
-                    <thead class="bg-primary">
+                    <thead class="bg-info">
                         <tr>
                             <th class="text-center">#</th>
                             <th class="text-center">Phim Chiếu</th>
@@ -190,7 +190,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                             </div>
                         </div>
                     </div>

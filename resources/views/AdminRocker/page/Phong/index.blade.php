@@ -2,29 +2,32 @@
 @section('noi_dung')
     <div class="row" id="app">
         <div class="col-md-5">
-            <div class="card">
-                <div class="card-header">
-                    Thêm Mới Phòng
+            <div class="card border-info border-bottom border-3 border-0">
+                <div class="card-header bg-primary">
+                    <strong class="card-title" style=" color: white; font-size: 20px">Thêm Mới Phòng</strong>
                 </div>
                 <div class="card-body">
                     <div class="form-group mt-2">
                         <label>Tên Phòng</label>
-                        <input v-model="them_moi.ten_phong" type="text" class="form-control"  placeholder="Nhập vào tên phòng">
+                        <input v-model="them_moi.ten_phong" type="text" class="form-control"
+                            placeholder="Nhập vào tên phòng">
                     </div>
                     <div class="form-group mt-3">
                         <label>Tình Trạng</label>
-                        <select  v-model="them_moi.tinh_trang"  class="form-control">
+                        <select v-model="them_moi.tinh_trang" class="form-control">
                             <option value="1">Còn Kinh Doanh</option>
                             <option value="0">Dừng Kinh Doanh</option>
                         </select>
                     </div>
                     <div class="form-group mt-3">
                         <label>Số Ghế Hàng Dọc</label>
-                        <input v-model="them_moi.hang_doc"  type="number" class="form-control" >
+                        <input v-model="them_moi.hang_doc" type="number" class="form-control"
+                            placeholder="Nhập số ghế hàng dọc">
                     </div>
                     <div class="form-group mt-3">
                         <label>Số Ghế Hàng Ngang</label>
-                        <input  v-model="them_moi.hang_ngang" type="number" class="form-control" >
+                        <input v-model="them_moi.hang_ngang" type="number" class="form-control"
+                            placeholder="Nhập số ghế hàng ngang">
                     </div>
                 </div>
                 <div class="card-footer text-end">
@@ -33,13 +36,13 @@
             </div>
         </div>
         <div class="col-md-7">
-            <div class="card">
-                <div class="card-header">
-                    Danh Sách Các Phòng
+            <div class="card border-info border-bottom border-3 border-0">
+                <div class="card-header bg-primary">
+                    <strong class="card-title" style=" color: white; font-size: 20px">Danh Sách Các Phòng</strong>
                 </div>
                 <div class="card-body table-responsive">
                     <table id="table" class="table table-bordered">
-                        <thead class="bg-primary">
+                        <thead class="bg-info">
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-center">Tên phòng</th>
@@ -54,15 +57,22 @@
                                 <th class="align-middle text-center">@{{ key + 1 }}</th>
                                 <td class="align-middle">@{{ value.ten_phong }}</td>
                                 <td class="align-middle text-center text-nowrap">
-                                    <button v-on:click="changeStatus(valgue.id)" class="btn btn-danger" v-if="value.tinh_trang == 0">Dừng Kinh Doanh</button>
-                                    <button v-on:click="changeStatus(value.id)" class="btn btn-primary" v-else>Còn Kinh Doanh</button>
+                                    <button v-on:click="changeStatus(valgue.id)" class="btn btn-danger"
+                                        v-if="value.tinh_trang == 0">Dừng Kinh Doanh</button>
+                                    <button v-on:click="changeStatus(value.id)" class="btn btn-primary" v-else>Còn Kinh
+                                        Doanh</button>
                                 </td>
                                 <td class="align-middle text-center">@{{ value.hang_doc }}</td>
                                 <td class="align-middle text-center">@{{ value.hang_ngang }}</td>
                                 <td class="align-middle text-center text-nowrap">
-                                    <button v-on:click="loadGhe(value.id, value.hang_ngang, value.hang_doc)" class="ghe btn btn-primary " style="margin-right: 5px" data-bs-toggle="modal" data-bs-target="#gheModal">Xem Ghế</button>
-                                    <button v-on:click="phong_update = value" data-bs-toggle="modal" data-bs-target="#editModal" style="margin-right: 5px" class="btn btn-info">Cập Nhật</button>
-                                    <button v-on:click="delete_phong = value"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa Phòng</button>
+                                    <button v-on:click="loadGhe(value.id, value.hang_ngang, value.hang_doc)"
+                                        class="ghe btn btn-primary " style="margin-right: 5px" data-bs-toggle="modal"
+                                        data-bs-target="#gheModal">Xem Ghế</button>
+                                    <button v-on:click="phong_update = value" data-bs-toggle="modal"
+                                        data-bs-target="#editModal" style="margin-right: 5px" class="btn btn-info">Cập
+                                        Nhật</button>
+                                    <button v-on:click="delete_phong = value" class="btn btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal">Xóa Phòng</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -82,8 +92,9 @@
                                         <input type="hidden" class="form-control" v-model="delete_phong.id"
                                             placeholder="Nhập vào id cần xóa">
                                     </div>
-                                    <div class="modal-footer" >
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Đóng</button>
                                         <button v-on:click="xoaPhong()" type="button" class="btn btn-primary"
                                             data-bs-dismiss="modal">Chấp Nhận Xóa</button>
                                     </div>
@@ -96,7 +107,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Phòng</h5>
-                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                            aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -104,19 +116,19 @@
                                         <input type="hidden" class="form-control" id="edit_id">
                                         <div class="form-group mt-1">
                                             <label>Tên Phòng</label>
-                                            <input  v-model="phong_update.ten_phong" type="text" class="form-control"
+                                            <input v-model="phong_update.ten_phong" type="text" class="form-control"
                                                 placeholder="Nhập vào tên phòng">
                                         </div>
                                         <div class="form-group mt-3">
                                             <label>Tình Trạng</label>
-                                            <select  v-model="phong_update.tinh_trang"  class="form-control">
-                                                <option v-bind:value="1">Còn Kinh Doanh</option>
+                                            <select v-model="phong_update.tinh_trang" class="form-control">
+                                                <option v-bind:value="1" selected>Còn Kinh Doanh</option>
                                                 <option v-bind:value="0">Dừng Kinh Doanh</option>
                                             </select>
                                         </div>
                                         <div class="form-group mt-3">
                                             <label>Số Ghế Hàng Dọc</label>
-                                            <input v-model="phong_update.hang_doc" type="number" class="form-control" >
+                                            <input v-model="phong_update.hang_doc" type="number" class="form-control">
                                         </div>
                                         <div class="form-group mt-3">
                                             <label>Số Ghế Hàng Ngang</label>
@@ -125,7 +137,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
+                                            data-bs-dismiss="modal">Đóng</button>
                                         <button v-on:click="capNhatPhong()" type="button" class="btn btn-primary"
                                             data-bs-dismiss="modal">Cập Nhật</button>
                                     </div>
@@ -154,7 +166,8 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Đóng</button>
                                 </div>
                             </div>
                         </div>
@@ -166,22 +179,21 @@
 @endsection
 @section('js')
     <script>
-         new Vue({
-            el      :   '#app',
-            data    :   {
-                them_moi   :   {},
-                ds_phong   :   [],
-                delete_phong  :   {},
-                phong_update:   {},
+        new Vue({
+            el: '#app',
+            data: {
+                them_moi: {},
+                ds_phong: [],
+                delete_phong: {},
+                phong_update: {},
             },
-            created()   {
-                this.createPhong();
+            created() {
                 this.loadPhong();
             },
-            methods :   {
+            methods: {
                 createPhong() {
                     axios
-                        .post('/admin/phong/index' , this.them_moi)
+                        .post('/admin/phong/index', this.them_moi)
                         .then((res) => {
                             toastr.success('Đã thêm mới phòng thành công!');
                             this.loadPhong();
@@ -193,7 +205,7 @@
                             });
                         });
                 },
-                loadPhong()  {
+                loadPhong() {
                     axios
                         .get('/admin/phong/data')
                         .then((res) => {
@@ -204,7 +216,7 @@
                 xoaPhong() {
                     console.log(this.delete_phong.id);
                     axios
-                        .get('/admin/phong/delete/'+ this.delete_phong.id)
+                        .get('/admin/phong/delete/' + this.delete_phong.id)
                         .then((res) => {
                             toastr.success('Đã xóa phòng thành công!');
                             this.loadPhong();
@@ -217,9 +229,9 @@
                 },
                 capNhatPhong() {
                     axios
-                        .post('/admin/phong/update' , this.phong_update)
+                        .post('/admin/phong/update', this.phong_update)
                         .then((res) => {
-                            if(res.data.status) {
+                            if (res.data.status) {
                                 toastr.success(res.data.messs);
                                 this.loadPhong();
                             } else {
@@ -240,22 +252,26 @@
                         .then((res) => {
                             var list_ghe = res.data.danh_sach_ghe;
                             console.log(list_ghe);
-                            var noi_dung   = '';
-                            var x          = 0;
-                            for(j = 0; j < hang_ngang; j++){
+                            var noi_dung = '';
+                            var x = 0;
+                            for (j = 0; j < hang_ngang; j++) {
                                 noi_dung += '<tr>';
-                                for(i = 0; i < hang_doc; i++){
+                                for (i = 0; i < hang_doc; i++) {
                                     x = j * hang_doc + i;
-                                    if(list_ghe[x].tinh_trang) {
-                                        noi_dung += '<th data-id="'+ list_ghe[x].id +'" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: #DEF5E5">'+ list_ghe[x].ten_ghe +'</th>';
+                                    if (list_ghe[x].tinh_trang) {
+                                        noi_dung += '<th data-id="' + list_ghe[x].id +
+                                            '" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: #DEF5E5">' +
+                                            list_ghe[x].ten_ghe + '</th>';
                                     } else {
-                                        noi_dung += '<th data-id="'+ list_ghe[x].id +'" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: red">'+ list_ghe[x].ten_ghe +'</th>';
+                                        noi_dung += '<th data-id="' + list_ghe[x].id +
+                                            '" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: red">' +
+                                            list_ghe[x].ten_ghe + '</th>';
                                     }
                                 }
                                 noi_dung += '</tr>';
                             }
                             $("#table_ghe thead").html(noi_dung);
-                    });
+                        });
                 },
 
                 changeStatus(id) {

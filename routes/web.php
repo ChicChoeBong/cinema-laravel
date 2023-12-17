@@ -105,6 +105,8 @@ Route::get('/admin/khach-hang/active/{hash}', [CustomerController::class, 'actio
 //Admin
 Route::group(['prefix' => '/admin', 'middleware' => 'loginAdmin'], function () {
     Route::get('/', [AdminController::class, 'viewHome']);
+    Route::post('/update', [AdminController::class, 'update']);
+    Route::get('/change-status/{id}', [AdminController::class, 'changeStatus']);
 
     //Quốc
     //Cấu hình homepage

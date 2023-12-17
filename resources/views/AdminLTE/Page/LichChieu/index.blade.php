@@ -2,9 +2,9 @@
 @section('noi_dung')
 <div class="row" id="app">
     <div class="col-md-12">
-        <div class="card border-primary border-bottom border-3 border-0">
-            <div class="card-header">
-                <strong> Thêm Mới Lịch Chiếu </strong>
+        <div class="card border-info border-bottom border-3 border-0">
+            <div class="card-header bg-primary"  >
+                <strong class="card-title" style=" color: white; font-size: 20px"> Thêm Mới Lịch Chiếu </strong>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -18,11 +18,11 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Thời Lượng Chiếu Chính</label>
-                        <input v-model="create_lich.thoi_gian_chieu_chinh" type="number" min="0" class="form-control">
+                        <input v-model="create_lich.thoi_gian_chieu_chinh" type="number" min="0" class="form-control" placeholder="Nhập thời lượng chiếu chính">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Thời Lượng Quảng Cáo</label>
-                        <input v-model="create_lich.thoi_gian_quang_cao" type="number" min="0" class="form-control">
+                        <input v-model="create_lich.thoi_gian_quang_cao" type="number" min="0" class="form-control" placeholder="Nhập thời gian quảng cáo">
                     </div>
                 </div>
                 <div class="row mt-3">
