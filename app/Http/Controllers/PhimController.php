@@ -53,7 +53,7 @@ class PhimController extends Controller
 
     public function destroy(CheckIdPhimRequest $request)
     {
-        Phim::where('id', $request->id)->first()->delete();
+        Phim::where('_id', $request->_id)->first()->delete();
 
         return response()->json([
             'status'    => true,
@@ -63,7 +63,7 @@ class PhimController extends Controller
     public function update(UpdatePhimRequest $request)
     {
         $data = $request->all();
-        $phim = Phim::where('id', $request->id)->first();
+        $phim = Phim::where('_id', $request->_id)->first();
         $phim->update($data);
 
         return response()->json([

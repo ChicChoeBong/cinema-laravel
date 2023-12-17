@@ -50,9 +50,10 @@
                                     <td class="text-center align-middle">@{{ value.ho_va_ten }}</td>
                                     <td class="text-center align-middle">@{{ value.email }}</td>
                                     <td class="text-center align-middle">
-                                        <button v-on:click="changeStatus(value.id)" v-if="value.is_block == 0"
+                                        <button v-on:click="changeStatus(value._id)" v-if="value.is_block == 0"
                                             class="btn btn-success">Đang Hoạt Động</button>
-                                        <button v-on:click="changeStatus(value.id)" v-else class="btn btn-warning">Dừng Hoạt
+                                        <button v-on:click="changeStatus(value._id)" v-else class="btn btn-warning">Dừng
+                                            Hoạt
                                             Động</button>
                                     </td>
                                     <td class="text-center align-middle">
@@ -74,7 +75,7 @@
                                 <div class="modal-body">
                                     <div class="form-group mt-2">
 
-                                        <input v-model="edit.id" type="hidden" class="form-control">
+                                        <input v-model="edit._id" type="hidden" class="form-control">
                                     </div>
                                     <div class="form-group mt-2">
                                         <label>Họ Và Tên</label>

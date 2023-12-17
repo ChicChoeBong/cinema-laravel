@@ -57,15 +57,15 @@
                                 <th class="align-middle text-center">@{{ key + 1 }}</th>
                                 <td class="align-middle">@{{ value.ten_phong }}</td>
                                 <td class="align-middle text-center text-nowrap">
-                                    <button v-on:click="changeStatus(valgue.id)" class="btn btn-danger"
+                                    <button v-on:click="changeStatus(valgue._id)" class="btn btn-danger"
                                         v-if="value.tinh_trang == 0">Dừng Kinh Doanh</button>
-                                    <button v-on:click="changeStatus(value.id)" class="btn btn-primary" v-else>Còn Kinh
+                                    <button v-on:click="changeStatus(value._id)" class="btn btn-primary" v-else>Còn Kinh
                                         Doanh</button>
                                 </td>
                                 <td class="align-middle text-center">@{{ value.hang_doc }}</td>
                                 <td class="align-middle text-center">@{{ value.hang_ngang }}</td>
                                 <td class="align-middle text-center text-nowrap">
-                                    <button v-on:click="loadGhe(value.id, value.hang_ngang, value.hang_doc)"
+                                    <button v-on:click="loadGhe(value._id, value.hang_ngang, value.hang_doc)"
                                         class="ghe btn btn-primary " style="margin-right: 5px" data-bs-toggle="modal"
                                         data-bs-target="#gheModal">Xem Ghế</button>
                                     <button v-on:click="phong_update = value" data-bs-toggle="modal"
@@ -89,7 +89,7 @@
                                     <div class="modal-body">
                                         <p>Chúng ta sẽ xóa Phòng, đồng nghĩa với việc Xóa tất cả Ghế của Phòng đó.</p>
                                         <p><b>Lưu ý:</b> Việc này không thể hoàn tác, hãy cẩn thận!</p>
-                                        <input type="hidden" class="form-control" v-model="delete_phong.id"
+                                        <input type="hidden" class="form-control" v-model="delete_phong._id"
                                             placeholder="Nhập vào id cần xóa">
                                     </div>
                                     <div class="modal-footer">
@@ -214,9 +214,9 @@
                         });
                 },
                 xoaPhong() {
-                    console.log(this.delete_phong.id);
+                    console.log(this.delete_phong._id);
                     axios
-                        .get('/admin/phong/delete/' + this.delete_phong.id)
+                        .get('/admin/phong/delete/' + this.delete_phong._id)
                         .then((res) => {
                             toastr.success('Đã xóa phòng thành công!');
                             this.loadPhong();
@@ -259,11 +259,11 @@
                                 for (i = 0; i < hang_doc; i++) {
                                     x = j * hang_doc + i;
                                     if (list_ghe[x].tinh_trang) {
-                                        noi_dung += '<th data-id="' + list_ghe[x].id +
+                                        noi_dung += '<th data-id="' + list_ghe[x]._id +
                                             '" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: #DEF5E5">' +
                                             list_ghe[x].ten_ghe + '</th>';
                                     } else {
-                                        noi_dung += '<th data-id="' + list_ghe[x].id +
+                                        noi_dung += '<th data-id="' + list_ghe[x]._id +
                                             '" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: red">' +
                                             list_ghe[x].ten_ghe + '</th>';
                                     }

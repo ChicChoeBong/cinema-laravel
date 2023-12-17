@@ -14,14 +14,14 @@ class CheckIdPhimRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'    =>  'required|exists:phims,id',
+            '_id'    =>  'required|exists:phims,_id',
         ];
     }
 
     public function messages()
     {
         return [
-            'id.*'  => 'Phim phải tồn tại trong hệ thống!',
+            '_id.*'  => 'Phim phải tồn tại trong hệ thống!',
         ];
     }
 }

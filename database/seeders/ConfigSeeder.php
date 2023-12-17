@@ -15,18 +15,18 @@ class ConfigSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('configs')->delete();
+        DB::collection('configs')->delete();
 
-        // Reset id về lại 1
-        DB::table('configs')->truncate();
+        $phimIds = DB::collection('phims')->pluck('_id')->toArray();
 
-        DB::table('configs')->insert([
-            [
-                'bg_homepage'     => "/assets_client/img/banner/s_slider_bg.jpg",
-                'id_phim'         => "2",
-                'phim_2'          => "3",
-                'phim_3'          => "4",
-            ],
-        ]);
+        $configData = [
+            'bg_homepage' => "/assets_client/img/banner/s_slider_bg.jpg",
+            'id_phim' => isset($phimIds[0]) ? $phimIds[0] : null,
+            'phim_2' => isset($phimIds[1]) ? $phimIds[1] : null,
+            'phim_3' => isset($phimIds[2]) ? $phimIds[2] : null,
+        ];
+
+        // Insert the example data into 'configs' collection
+        DB::collection('configs')->insert([$configData]);
     }
 }

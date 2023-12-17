@@ -10,6 +10,7 @@ class Phim extends Model
     use HasFactory;
 
     protected $table ='phims';
+    
     protected $fillable = [
         'ten_phim',
         'slug_ten_phim',

@@ -13,10 +13,10 @@ class HomepageController extends Controller
 {
     public function index()
     {
-        $config = Config::orderByDESC('id')->first();
-        $phim_1 = Phim::where('id', $config->id_phim)->first();
-        $phim_2 = Phim::where('id', $config->phim_2)->first();
-        $phim_3 = Phim::where('id', $config->phim_3)->first();
+        $config = Config::orderByDESC('_id')->first();
+        $phim_1 = Phim::where('_id', $config->id_phim)->first();
+        $phim_2 = Phim::where('_id', $config->phim_2)->first();
+        $phim_3 = Phim::where('_id', $config->phim_3)->first();
 
         $list_phim = Phim::where('tinh_trang' , '>' , 0)->get();
         return view('client.homepage', compact('config', 'phim_1', 'phim_2', 'phim_3' , 'list_phim'));
@@ -28,7 +28,7 @@ class HomepageController extends Controller
         $parts = explode('-', $slug);
         preg_match('/\d+$/', $slug, $matches);
         $id = $matches[0];
-        $phim = Phim::where('id' , $id)->first();
+        $phim = Phim::where('_id' , $id)->first();
         $lichChieu = LichChieu::where('id_phim', $id)
                               ->where('thoi_gian_ket_thuc', '>=', Carbon::now()->toDateTimeString())
                               ->get();

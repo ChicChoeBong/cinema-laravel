@@ -10,7 +10,7 @@ class ConfigController extends Controller
 {
     public function index()
     {
-        $config         = Config::orderByDESC('id')->first();
+        $config         = Config::orderByDESC('_id')->first();
         $danhSachPhim   = Phim::where('tinh_trang', '>', 0)->get();
         return view('AdminRocker.page.CauHinh.index', compact('config', 'danhSachPhim'));
     }

@@ -32,14 +32,14 @@
                             <td class="text-nowrap text-center align-middle">@{{ date_format(value.ngay_sinh) }}</td>
                             <td class="text-nowrap text-center align-middle">@{{ value.gioi_tinh == 1 ? 'Nam' : 'Nữ' }}</td>
                             <td class="text-nowrap text-center align-middle">
-                                <button v-on:click="changeStatus(value.id)" class="btn btn-danger"
+                                <button v-on:click="changeStatus(value._id)" class="btn btn-danger"
                                     v-if="value.loai_tai_khoan == -1">Tạm Khóa</button>
-                                <button v-on:click="changeStatus(value.id)" class="btn btn-success" v-else>Đang Mở</button>
+                                <button v-on:click="changeStatus(value._id)" class="btn btn-success" v-else>Đang Mở</button>
                             </td>
                             <td class="text-nowrap text-center align-middle">
-                                <button v-on:click="kichHoat(value.id)" class="btn btn-warning"
+                                <button v-on:click="kichHoat(value._id)" class="btn btn-warning"
                                     v-if="value.loai_tai_khoan == 1">Hủy Kích Hoạt</button>
-                                <button v-on:click="kichHoat(value.id)" class="btn btn-info" v-else>Kích Hoạt</button>
+                                <button v-on:click="kichHoat(value._id)" class="btn btn-info" v-else>Kích Hoạt</button>
                             </td>
                             <td class="text-nowrap text-center align-middle">
                                 <button v-on:click="edit = value" class="btn btn-primary " data-bs-toggle="modal"
@@ -61,7 +61,7 @@
                         <div class="modal-body">
                             <div class="form-group mt-2">
 
-                                <input v-model="edit.id" type="hidden" class="form-control">
+                                <input v-model="edit._id" type="hidden" class="form-control">
                             </div>
                             <div class="form-group mt-2">
                                 <label>Họ Và Tên</label>
@@ -108,7 +108,7 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden"v-model="xoa.id">
+                            <input type="hidden"v-model="xoa._id">
                             Ban chắc chắn là sẽ xoá khách hàng <b class="text-danger">@{{ xoa.ho_va_ten }}</b> này!<br>
                             <b>Lưu ý: Hành động này không thể khôi phục!</b>
                         </div>
@@ -160,7 +160,7 @@
                         .get('/admin/khach-hang/data')
                         .then((res) => {
                             this.list = res.data.data;
-                            });
+                        });
                 },
                 updateKhachHang() {
                     axios

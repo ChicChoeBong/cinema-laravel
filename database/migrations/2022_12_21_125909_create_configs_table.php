@@ -9,8 +9,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('configs', function (Blueprint $table) {
-            $table->id();
             $table->string('bg_homepage')->nullable();
+            $table->integer('id_phim')->nullable();
+            $table->integer('phim_2')->nullable();
+            $table->integer('phim_3')->nullable();
             $table->timestamps();
         });
     }

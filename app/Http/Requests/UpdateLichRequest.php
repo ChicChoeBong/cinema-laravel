@@ -15,8 +15,8 @@ class UpdateLichRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_phong'                  =>  'required|exists:phongs,id',
-            'id_phim'                   =>  'required|exists:phims,id',
+            'id_phong'                  =>  'required|exists:phongs,_id',
+            'id_phim'                   =>  'required|exists:phims,_id',
             'thoi_gian_chieu_chinh'     =>  'required|numeric|min:0',
             'thoi_gian_quang_cao'       =>  'required|numeric|min:0',
             // 'ngay_chieu'              =>  'required|date',

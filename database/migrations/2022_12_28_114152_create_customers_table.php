@@ -9,7 +9,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->id();
             $table->string('ho_va_ten');
             $table->string('email');
             $table->string('password');
@@ -19,6 +18,7 @@ return new class extends Migration
             $table->date('ngay_sinh');
             $table->integer('gioi_tinh');
             $table->integer('loai_tai_khoan')->default(0);
+            $table->string('hash_reset')->nullable();
             $table->timestamps();
         });
     }

@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('phims', function (Blueprint $table) {
-            $table->id();
             $table->string('ten_phim');
             $table->string('slug_ten_phim')->unique();
             $table->string('dao_dien');

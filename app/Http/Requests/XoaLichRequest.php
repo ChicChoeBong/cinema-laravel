@@ -14,14 +14,14 @@ class XoaLichRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'    =>  'required|exists:lich_chieus,id',
+            '_id'    =>  'required|exists:lich_chieus,_id',
         ];
     }
 
     public function messages()
     {
         return [
-            'id.*'    =>  'Lịch chiếu phim không tồn tại!',
+            '_id.*'    =>  'Lịch chiếu phim không tồn tại!',
         ];
     }
 }

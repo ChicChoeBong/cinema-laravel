@@ -14,9 +14,9 @@ class UpdatePhimRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'                => 'required|exists:phims,id',
+            '_id'                => 'required|exists:phims,_id',
             'ten_phim'          => 'required',
-            'slug_ten_phim'     => 'required|unique:phims,slug_ten_phim,' . $this->id,
+            'slug_ten_phim'     => 'required|unique:phims,slug_ten_phim,' . $this->_id,
             'dao_dien'          => 'required',
             'ngay_khoi_chieu'   => 'required|date',
             'dien_vien'         => 'required',
@@ -32,7 +32,7 @@ class UpdatePhimRequest extends FormRequest
     public function messages()
     {
         return [
-            'id.*'                      => 'Phim phải tồn tại trong hệ thống!',
+            '_id.*'                      => 'Phim phải tồn tại trong hệ thống!',
             'ten_phim.*'                => 'Tên phim không được để trống',
             'slug_ten_phim.required'    => 'Slug không được để trống',
             'slug_ten_phim.unique'      => 'Slug đã tồn tại!',

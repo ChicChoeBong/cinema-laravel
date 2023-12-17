@@ -9,7 +9,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ghes', function (Blueprint $table) {
-            $table->id();
             $table->string('ten_ghe');
             $table->integer('tinh_trang');
             $table->integer('id_phong');

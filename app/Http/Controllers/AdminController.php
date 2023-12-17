@@ -51,7 +51,7 @@ class AdminController extends Controller
 
     public function update(Request $request){
         $data = $request->all();
-        $phim = Admin::where('id', $request->id)->first();
+        $phim = Admin::where('_id', $request->_id)->first();
         $phim->update($data);
 
         return response()->json([
@@ -61,7 +61,7 @@ class AdminController extends Controller
 
     public function changeStatus($id)
     {
-        $change = Admin::find($id);
+        $change = Admin::find(['_id' => $id])->first();
         if($change->is_block == 1) {
             $change->is_block = 0;
         } else  {

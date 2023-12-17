@@ -46,12 +46,12 @@ class LoginSocialController extends Controller
     }
 
     protected function registrationOrLogin($data){
-        $user = User::where('provider_id', $data->id)->first();
+        $user = User::where('provider_id', $data->_id)->first();
         if(!$user){
             $user = new User;
             $user->name = $data->name;
             $user->email = $data->email;
-            $user->provider_id = $data->id;
+            $user->provider_id = $data->_id;
             $user->avatar = $data->avatar;
             $user->token = $data->token;
             $user->save();

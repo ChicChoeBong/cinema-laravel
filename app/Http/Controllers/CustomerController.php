@@ -37,7 +37,7 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        $phim = Customer::where('id', $request->id)->first();
+        $phim = Customer::where('_id', $request->_id)->first();
         $phim->update($data);
 
         return response()->json([
@@ -47,7 +47,7 @@ class CustomerController extends Controller
 
     public function destroy(Request $request)
     {
-        Customer::where('id', $request->id)->first()->delete();
+        Customer::where('_id', $request->_id)->first()->delete();
 
         return response()->json([
             'status'    => true,
@@ -56,7 +56,7 @@ class CustomerController extends Controller
 
     public function changeStatus($id)
     {
-        $change = Customer::find($id);
+        $change = Customer::find(['_id' => $id])->first();
         if($change->loai_tai_khoan == -1) {
             $change->loai_tai_khoan = 1;
         } else  {
@@ -67,7 +67,7 @@ class CustomerController extends Controller
 
     public function kichHoat($id)
     {
-        $kickHoat = Customer::find($id);
+        $kickHoat = Customer::find(['_id' => $id])->first();
         if($kickHoat->loai_tai_khoan == 0) {
             $kickHoat->loai_tai_khoan = 1;
             $kickHoat['hash_mail'] = Str::uuid();
@@ -78,11 +78,6 @@ class CustomerController extends Controller
         }
         $kickHoat->save();
     }
-
-
-
-
-
 
     public function actionUpdatePassword(UpdatePasswordRequest $request)
     {
@@ -100,7 +95,6 @@ class CustomerController extends Controller
     public function viewUpdatePassword($hash)
     {
         $customer = Customer::where('hash_reset', $hash)->first();
-        // dd($customer);
         if($customer) {
             return view('client.cap_nhat_mat_khau', compact('hash'));
         } else {
@@ -111,16 +105,6 @@ class CustomerController extends Controller
 
     public function actionResetPassword(ResetPasswordRequest $request)
     {
-        // $dataReset['email']     = $request->email;
-        // $hash     = Str::uuid();
-        // $dataReset['hash_reset'] = $hash;
-        // SendEmailResetPassword::dispatch($dataReset);
-
-        // toastr()->success('Vui lòng kiểm tra email');
-
-        // return redirect()->back();
-
-
         // Kiểm tra email có tồn tại trong database
         $customer = Customer::where('email', $request->email)->first();
 
@@ -228,19 +212,7 @@ class CustomerController extends Controller
         return redirect('/login');
     }
 
-    public function viewBaiViet()
-    {
-        $baiViet = QuanLyBaiViet::where('is_open', 1)->get();
-        return view('client.bai_viet', compact('baiViet'));
-    }
-
-    public function viewBaiVietDetail($id)
-    {
-        $baiVietDetail = QuanLyBaiViet::find($id);
-        $baiViet = QuanLyBaiViet::where('is_open', 1)->get();
-        return view('client.bai_viet_detail', compact('baiVietDetail','baiViet'));
-    }
-public function actionLogout()
+    public function actionLogout()
     {
         Auth::guard('customer')->logout();
         Auth::logout();

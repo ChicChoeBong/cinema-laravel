@@ -18,10 +18,10 @@ class LichChieuController extends Controller
 {
     public function viewKhachHangDatVe($id_lich_chieu)
     {
-        $lichChieu = LichChieu::where('id', $id_lich_chieu)
+        $lichChieu = LichChieu::where('_id', $id_lich_chieu)
             ->where('thoi_gian_ket_thuc', '>=', Carbon::now()->toDateTimeString())
             ->first();
-        $user_login = Auth::guard('customer')->user()->id ?? Auth::user()->id;
+        $user_login = Auth::guard('customer')->user()->_id ?? Auth::user()->_id;
 
         if ($lichChieu) {
             return view('client.dat_ve', compact('id_lich_chieu', 'user_login'));
@@ -34,8 +34,8 @@ class LichChieuController extends Controller
     public function showDataByIdLich($id_lich_chieu)
     {
         $data = GheBan::where('id_lich', $id_lich_chieu)->get();
-        $phong = LichChieu::join('phongs', 'lich_chieus.id_phong', 'phongs.id')
-            ->where('lich_chieus.id', $id_lich_chieu)
+        $phong = LichChieu::join('phongs', 'lich_chieus.id_phong', 'phongs._id')
+            ->where('lich_chieus._id', $id_lich_chieu)
             ->first();
 
         return response()->json([
@@ -47,15 +47,15 @@ class LichChieuController extends Controller
 
     public function destroy(XoaLichRequest $request)
     {
-        LichChieu::where('id', $request->id)->delete();
+        LichChieu::where('_id', $request->_id)->delete();
 
-        GheBan::where('id_lich', $request->id)->delete();
+        GheBan::where('id_lich', $request->_id)->delete();
     }
 
     public function getData()
     {
-        $data = LichChieu::join('phims', 'lich_chieus.id_phim', 'phims.id')
-            ->join('phongs', 'lich_chieus.id_phong', 'phongs.id')
+        $data = LichChieu::join('phims', 'lich_chieus.id_phim', 'phims._id')
+            ->join('phongs', 'lich_chieus.id_phong', 'phongs._id')
             ->select('phims.ten_phim', 'phongs.ten_phong', 'lich_chieus.*')
             ->orderBy('lich_chieus.thoi_gian_bat_dau')
             ->get();
@@ -148,13 +148,13 @@ class LichChieuController extends Controller
         ]);
 
         // Lấy tất các các ghế của phòng
-        $tat_ca_ghe = Phong::where('phongs.id', $request->id_phong)
-            ->join('ghes', 'ghes.id_phong', 'phongs.id')
+        $tat_ca_ghe = Phong::where('phongs._id', $request->id_phong)
+            ->join('ghes', 'ghes.id_phong', 'phongs._id')
             ->get();
 
         foreach ($tat_ca_ghe as $key => $value) {
             GheBan::create([
-                'id_lich'   => $lich_chieu->id,
+                'id_lich'   => $lich_chieu->_id,
                 'ten_ghe'   => $value->ten_ghe,
             ]);
         }
@@ -216,8 +216,8 @@ class LichChieuController extends Controller
 
     public function dataThoiKhoaBieu()
     {
-        $data = LichChieu::join('phims', 'lich_chieus.id_phim', 'phims.id')
-            ->join('phongs', 'lich_chieus.id_phong', 'phongs.id')
+        $data = LichChieu::join('phims', 'lich_chieus.id_phim', 'phims._id')
+            ->join('phongs', 'lich_chieus.id_phong', 'phongs._id')
             ->select(
                 'phims.ten_phim',
                 'phongs.ten_phong',
@@ -258,7 +258,7 @@ class LichChieuController extends Controller
         //         $thoi_gian_ket_thuc = Carbon::create($year, $month, $day, $hour_2, $mi_2, 0);
 
         $data = $request->all();
-        $lich_chieu = LichChieu::where('id', $request->id)->first();
+        $lich_chieu = LichChieu::where('id', $request->_id)->first();
         $lich_chieu->update($data);
 
         return response()->json([

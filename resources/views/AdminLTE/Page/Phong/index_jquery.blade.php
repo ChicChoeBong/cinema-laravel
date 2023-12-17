@@ -1,6 +1,6 @@
 @extends('AdminLTE.Share.master')
 @section('noi_dung')
-    <div class="row" >
+    <div class="row">
         <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
@@ -68,8 +68,9 @@
                                         <input type="hidden" class="form-control" id="delete_id"
                                             placeholder="Nhập vào id cần xóa">
                                     </div>
-                                    <div class="modal-footer" >
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
                                         <button id="delete_accpect" type="button" class="btn btn-primary"
                                             data-bs-dismiss="modal">Chấp Nhận Xóa</button>
                                     </div>
@@ -139,7 +140,8 @@
                                     </table>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
@@ -152,9 +154,9 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            var id_phong    = 0;
-            var hang_ngang  = 0;
-            var hang_doc    = 0;
+            var id_phong = 0;
+            var hang_ngang = 0;
+            var hang_doc = 0;
             $("#add").click(function() {
                 var payload = {
                     'ten_phong': $("#ten_phong").val(),
@@ -206,21 +208,22 @@
                     noi_dung += '<td class="align-middle">' + value.ten_phong + '</td>';
                     noi_dung += '<td class="align-middle text-center">';
                     if (value.tinh_trang) {
-                        noi_dung += '<button data-id="' + value.id +
+                        noi_dung += '<button data-id="' + value._id +
                             '" class="xxx btn btn-primary">Đang Kinh Doanh</button>';
                     } else {
-                        noi_dung += '<button data-id="' + value.id +
+                        noi_dung += '<button data-id="' + value._id +
                             '" class="xxx btn btn-warning">Dừng Kinh Doanh</button>';
                     }
                     noi_dung += '</td>';
                     noi_dung += '<td class="align-middle text-center">' + value.hang_doc + '</td>';
                     noi_dung += '<td class="align-middle text-center">' + value.hang_ngang + '</td>';
                     noi_dung += '<td class="text-nowrap text-center align-middle">';
-                    noi_dung += '<button data-id="' + value.id +
-                        '" data-hangngang="'+ value.hang_ngang +'" data-hangdoc="'+ value.hang_doc +'" class="ghe btn btn-primary " style="margin-right: 5px" data-bs-toggle="modal" data-bs-target="#gheModal">Xem Ghế</button>';
-                    noi_dung += '<button data-id="' + value.id +
+                    noi_dung += '<button data-id="' + value._id +
+                        '" data-hangngang="' + value.hang_ngang + '" data-hangdoc="' + value.hang_doc +
+                        '" class="ghe btn btn-primary " style="margin-right: 5px" data-bs-toggle="modal" data-bs-target="#gheModal">Xem Ghế</button>';
+                    noi_dung += '<button data-id="' + value._id +
                         '" class="edit btn btn-info mr-1" data-bs-toggle="modal" style="margin-right: 5px" data-bs-target="#editModal">Cập Nhật</button>';
-                    noi_dung += '<button data-id="' + value.id +
+                    noi_dung += '<button data-id="' + value._id +
                         '" class="del btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Xóa Phòng</button>';
                     noi_dung += '</td>';
                     noi_dung += '</tr>';
@@ -250,7 +253,7 @@
                     .get('/admin/phong/edit/' + id)
                     .then((res) => {
                         var phong = res.data.data;
-                        $("#edit_id").val(phong.id);
+                        $("#edit_id").val(phong._id);
                         $("#edit_ten_phong").val(phong.ten_phong);
                         $("#edit_hang_ngang").val(phong.hang_ngang);
                         $("#edit_hang_doc").val(phong.hang_doc);
@@ -268,41 +271,43 @@
                     });
             })
 
-            function loadGhe(id_phong, hang_ngang, hang_doc)
-            {
+            function loadGhe(id_phong, hang_ngang, hang_doc) {
                 axios
                     .get('/admin/phong/data-ghe/' + id_phong)
                     .then((res) => {
                         var list_ghe = res.data.danh_sach_ghe;
 
-                        var noi_dung   = '';
-                        var x          = 0;
-                        for(j = 0; j < hang_ngang; j++){
+                        var noi_dung = '';
+                        var x = 0;
+                        for (j = 0; j < hang_ngang; j++) {
                             noi_dung += '<tr>';
-                            for(i = 0; i < hang_doc; i++){
+                            for (i = 0; i < hang_doc; i++) {
                                 x = j * hang_doc + i;
-                                if(list_ghe[x].tinh_trang) {
-                                    noi_dung += '<th data-id="'+ list_ghe[x].id +'" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: #DEF5E5">'+ list_ghe[x].ten_ghe +'</th>';
+                                if (list_ghe[x].tinh_trang) {
+                                    noi_dung += '<th data-id="' + list_ghe[x]._id +
+                                        '" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: #DEF5E5">' +
+                                        list_ghe[x].ten_ghe + '</th>';
                                 } else {
-                                    noi_dung += '<th data-id="'+ list_ghe[x].id +'" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: red">'+ list_ghe[x].ten_ghe +'</th>';
+                                    noi_dung += '<th data-id="' + list_ghe[x]._id +
+                                        '" class="change text-center aligin-middle" style="height: 70px; font-size: 30px; background-color: red">' +
+                                        list_ghe[x].ten_ghe + '</th>';
                                 }
                             }
                             noi_dung += '</tr>';
                         }
                         $("#table_ghe").html(noi_dung);
-                });
+                    });
             }
 
             $("body").on('click', '.ghe', function() {
-                id_phong   = $(this).data('id');
+                id_phong = $(this).data('id');
                 hang_ngang = $(this).data('hangngang');
-                hang_doc   = $(this).data('hangdoc');
+                hang_doc = $(this).data('hangdoc');
                 loadGhe(id_phong, hang_ngang, hang_doc);
             });
 
             loadData();
 
         });
-
     </script>
 @endsection

@@ -31,8 +31,8 @@
                             <select class="form-control" name="id_phim">
                                 @foreach ($danhSachPhim as $key => $value)
                                     <option
-                                        {{ isset($config->id_phim) && $value->id == $config->id_phim ? 'selected' : '' }}
-                                        value="{{ $value->id }}">{{ $value->ten_phim }}</option>
+                                        {{ isset($config->id_phim) && $value->_id == $config->id_phim ? 'selected' : '' }}
+                                        value="{{ $value->_id }}">{{ $value->ten_phim }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -40,8 +40,8 @@
                             <label>Phim Hiển Thị Trang Chủ</label>
                             <select class="form-control" name="phim_2">
                                 @foreach ($danhSachPhim as $key => $value)
-                                    <option {{ isset($config->phim_2) && $value->id == $config->phim_2 ? 'selected' : '' }}
-                                        value="{{ $value->id }}">{{ $value->ten_phim }}</option>
+                                    <option {{ isset($config->phim_2) && $value->_id == $config->phim_2 ? 'selected' : '' }}
+                                        value="{{ $value->_id }}">{{ $value->ten_phim }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -49,8 +49,8 @@
                             <label>Phim Hiển Thị Trang Chủ</label>
                             <select class="form-control" name="phim_3">
                                 @foreach ($danhSachPhim as $key => $value)
-                                    <option {{ isset($config->phim_3) && $value->id == $config->phim_3 ? 'selected' : '' }}
-                                        value="{{ $value->id }}">{{ $value->ten_phim }}</option>
+                                    <option {{ isset($config->phim_3) && $value->_id == $config->phim_3 ? 'selected' : '' }}
+                                        value="{{ $value->_id }}">{{ $value->ten_phim }}</option>
                                 @endforeach
                             </select>
                         </div>

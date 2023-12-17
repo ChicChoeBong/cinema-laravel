@@ -30,7 +30,7 @@ class PhongController extends Controller
                 Ghe::create([
                     'ten_ghe'       => $ten_ghe,
                     'tinh_trang'    => 1,
-                    'id_phong'      => $newPhong->id,
+                    'id_phong'      => $newPhong->_id,
                 ]);
             }
         }
@@ -43,7 +43,7 @@ class PhongController extends Controller
     public function update(Request $request)
     {
         // dd($request->all());
-        $phong = Phong::where('id', $request->id)->first();
+        $phong = Phong::where('_id', $request->_id)->first();
 
         if($phong) {
             $phong->ten_phong   = $request->ten_phong;
@@ -53,7 +53,7 @@ class PhongController extends Controller
             $phong->save();
 
             // Xóa sạch ghế trong phòng
-            Ghe::where('id_phong', $request->id)->delete();
+            Ghe::where('id_phong', $request->_id)->delete();
             // Tạo mới lại số ghế $request->hang_doc * $request->hang_ngang
             for($dong = 1; $dong <= $request->hang_ngang; $dong++) {
                 $chu = chr($dong + 64);
@@ -62,7 +62,7 @@ class PhongController extends Controller
                     Ghe::create([
                         'ten_ghe'       => $ten_ghe,
                         'tinh_trang'    => 1,
-                        'id_phong'      => $request->id,
+                        'id_phong'      => $request->_id,
                     ]);
                 }
             }
@@ -84,7 +84,7 @@ class PhongController extends Controller
 
     public function changeStatus($id)
     {
-        $phong = Phong::where('id', $id)->first();
+        $phong = Phong::where('_id', $id)->first();
 
         if($phong) {
             $phong->tinh_trang = !$phong->tinh_trang;
@@ -94,7 +94,7 @@ class PhongController extends Controller
 
     public function destroy($id)
     {
-        $phong = Phong::where('id', $id)->first();
+        $phong = Phong::where('_id', $id)->first();
 
         if($phong) {
             Ghe::where('id_phong', $id)->delete();
@@ -104,7 +104,7 @@ class PhongController extends Controller
 
     public function edit($id)
     {
-        $phong = Phong::where('id', $id)->first();
+        $phong = Phong::where('_id', $id)->first();
 
         return response()->json([
             'data'  => $phong
@@ -113,7 +113,7 @@ class PhongController extends Controller
 
     public function getDataGhe($id_phong)
     {
-        $phong = Phong::where('id', $id_phong)->first();
+        $phong = Phong::where('_id', $id_phong)->first();
         $data  = Ghe::where('id_phong', $id_phong)->get();
 
         return response()->json([

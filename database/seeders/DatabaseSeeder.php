@@ -15,12 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
+        // Schema::compileForeign();
         $this->call(AdminSeeder::class);
-        $this->call(BaiVietSeeder::class);
-        $this->call(LichChieuSeeder::class);
         $this->call(PhimSeeder::class);
         $this->call(ConfigSeeder::class);
-        Schema::enableForeignKeyConstraints();
+        $this->call(PhongSeeder::class);
+        $this->call(LichChieuSeeder::class);
+        // Schema::enableForeignKeyConstraints();
     }
 }

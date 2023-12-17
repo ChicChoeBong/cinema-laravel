@@ -15,12 +15,9 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admins')->delete();
+        DB::collection('admins')->delete();
 
-        // Reset id về lại 1
-        DB::table('admins')->truncate();
-
-        DB::table('admins')->insert([
+        DB::collection('admins')->insert([
             [
                 'email'             => "admin@master.com",
                 'ho_va_ten'         => "Admin",
