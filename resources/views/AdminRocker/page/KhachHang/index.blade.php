@@ -114,7 +114,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button v-on:click="xoaKhachHang()" type="button" class="btn btn-primary">Lưu</button>
+                            <button v-on:click="xoaKhachHang()" type="button" class="btn btn-danger">Xóa</button>
                         </div>
                     </div>
                 </div>

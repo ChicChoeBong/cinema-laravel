@@ -85,7 +85,6 @@ class PhongController extends Controller
     public function changeStatus($id)
     {
         $phong = Phong::where('_id', $id)->first();
-
         if($phong) {
             $phong->tinh_trang = !$phong->tinh_trang;
             $phong->save();

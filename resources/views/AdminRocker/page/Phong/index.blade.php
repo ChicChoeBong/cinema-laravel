@@ -57,7 +57,7 @@
                                 <th class="align-middle text-center">@{{ key + 1 }}</th>
                                 <td class="align-middle">@{{ value.ten_phong }}</td>
                                 <td class="align-middle text-center text-nowrap">
-                                    <button v-on:click="changeStatus(valgue._id)" class="btn btn-danger"
+                                    <button v-on:click="changeStatus(value._id)" class="btn btn-danger"
                                         v-if="value.tinh_trang == 0">Dừng Kinh Doanh</button>
                                     <button v-on:click="changeStatus(value._id)" class="btn btn-primary" v-else>Còn Kinh
                                         Doanh</button>
@@ -87,7 +87,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Chúng ta sẽ xóa Phòng, đồng nghĩa với việc Xóa tất cả Ghế của Phòng đó.</p>
+                                        <p>Xóa Phòng, đồng nghĩa với việc Xóa tất cả Ghế của Phòng đó.</p>
                                         <p><b>Lưu ý:</b> Việc này không thể hoàn tác, hãy cẩn thận!</p>
                                         <input type="hidden" class="form-control" v-model="delete_phong._id"
                                             placeholder="Nhập vào id cần xóa">

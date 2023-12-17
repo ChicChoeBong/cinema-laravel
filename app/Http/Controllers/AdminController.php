@@ -73,6 +73,7 @@ class AdminController extends Controller
     public function store(CreateTaiKhoanRequest $request)
     {
         $data = $request->all();
+        $data['is_block'] = 1;
         $data['password'] = bcrypt($request->password);
 
         Admin::create($data);
