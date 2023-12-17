@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use MongoDB\BSON\ObjectID;
 
 class LichChieuController extends Controller
 {
@@ -176,13 +177,16 @@ class LichChieuController extends Controller
             ]);
         }
 
+        $request['id_phong'] = new ObjectId($request['id_phong']);
+        $request['id_phim'] = new ObjectId($request['id_phim']);
+
         $lich_chieu = LichChieu::create([
             'id_phong'                  => $request->id_phong,
             'id_phim'                   => $request->id_phim,
             'thoi_gian_chieu_chinh'     => $request->thoi_gian_chieu_chinh,
             'thoi_gian_quang_cao'       => $request->thoi_gian_quang_cao,
-            'thoi_gian_bat_dau'         => $thoi_gian_bat_dau,
-            'thoi_gian_ket_thuc'        => $thoi_gian_ket_thuc,
+            'thoi_gian_bat_dau'         => $gio_bat_dau,
+            'thoi_gian_ket_thuc'        => $gio_ket_thuc,
         ]);
 
         // Lấy tất các các ghế của phòng
@@ -231,8 +235,11 @@ class LichChieuController extends Controller
                 $hour_2 = $gio_ket_thuc->hour;
                 $mi_2   = $gio_ket_thuc->minute;
 
-                $thoi_gian_bat_dau  = Carbon::create($year, $month, $day, $hour_1, $mi_1, 0);
-                $thoi_gian_ket_thuc = Carbon::create($year, $month, $day, $hour_2, $mi_2, 0);
+                $thoi_gian_bat_dau  = Carbon::create($year, $month, $day, $hour_1, $mi_1, 0)->toDateTimeString();
+                $thoi_gian_ket_thuc = Carbon::create($year, $month, $day, $hour_2, $mi_2, 0)->toDateTimeString();
+
+                $request['id_phong'] = new ObjectId($request['id_phong']);
+                $request['id_phim'] = new ObjectId($request['id_phim']);
 
                 LichChieu::create([
                     'id_phong'                  => $request->id_phong,
@@ -296,7 +303,11 @@ class LichChieuController extends Controller
         //         $thoi_gian_ket_thuc = Carbon::create($year, $month, $day, $hour_2, $mi_2, 0);
 
         $data = $request->all();
-        $lich_chieu = LichChieu::where('id', $request->_id)->first();
+        $data['id_phong'] = new ObjectId($data['id_phong']);
+        $data['id_phim'] = new ObjectId($data['id_phim']);
+        $data['thoi_gian_bat_dau'] = $data['thoi_gian_bat_dau']->toDateTimeString();
+        $data['thoi_gian_ket_thuc'] = $data['thoi_gian_ket_thuc']->toDateTimeString();
+        $lich_chieu = LichChieu::where('_id', $request->_id)->first();
         $lich_chieu->update($data);
 
         return response()->json([

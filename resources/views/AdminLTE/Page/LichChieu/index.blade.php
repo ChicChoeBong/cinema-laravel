@@ -120,6 +120,8 @@
                     axios
                         .post('/admin/lich-chieu/index', this.create_lich)
                         .then((res) => {
+                            this.loadDataPhim();
+                            this.loadDataPhong();
                             toastr.success('Đã thêm mới lịch chiếu thành công!');
                         })
                         .catch((res) => {
